@@ -451,7 +451,8 @@ class ManageBuildersBottomSheetState extends State<ManageBuildersBottomSheet> {
         AppTextField(
           hint: "",
           onChanged: (value) {},
-          controller: _name,
+          controller: _count,
+          inputType: TextInputType.number,
         ),
         const SizedBox(height: 8),
         Row(
