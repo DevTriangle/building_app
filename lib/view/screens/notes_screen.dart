@@ -15,6 +15,8 @@ class NotesScreenState extends State<NotesScreen> {
   List<Note> notes = [
     Note("title", "text"),
     Note("title", "texttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttext"),
+    Note("title",
+        "texttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttext"),
   ];
 
   @override
