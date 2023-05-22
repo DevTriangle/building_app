@@ -224,10 +224,11 @@ class ManageBuildingBottomSheetState extends State<ManageBuildingBottomSheet> {
         Text(
           "Название",
           style: TextStyle(
-            fontSize: 12,
+            fontSize: 15,
             color: Theme.of(context).hintColor,
           ),
         ),
+        const SizedBox(height: 4),
         AppTextField(
           hint: "",
           onChanged: (value) {},
@@ -237,10 +238,11 @@ class ManageBuildingBottomSheetState extends State<ManageBuildingBottomSheet> {
         Text(
           "Изображение (url)",
           style: TextStyle(
-            fontSize: 12,
+            fontSize: 15,
             color: Theme.of(context).hintColor,
           ),
         ),
+        const SizedBox(height: 4),
         AppTextField(
           hint: "",
           onChanged: (value) {},
@@ -250,10 +252,11 @@ class ManageBuildingBottomSheetState extends State<ManageBuildingBottomSheet> {
         Text(
           "Кол-во комнат",
           style: TextStyle(
-            fontSize: 12,
+            fontSize: 15,
             color: Theme.of(context).hintColor,
           ),
         ),
+        const SizedBox(height: 4),
         AppTextField(
           hint: "",
           onChanged: (value) {},
@@ -264,10 +267,11 @@ class ManageBuildingBottomSheetState extends State<ManageBuildingBottomSheet> {
         Text(
           "Площадь",
           style: TextStyle(
-            fontSize: 12,
+            fontSize: 15,
             color: Theme.of(context).hintColor,
           ),
         ),
+        const SizedBox(height: 4),
         AppTextField(
           hint: "",
           onChanged: (value) {},
@@ -278,10 +282,11 @@ class ManageBuildingBottomSheetState extends State<ManageBuildingBottomSheet> {
         Text(
           "Цена",
           style: TextStyle(
-            fontSize: 12,
+            fontSize: 15,
             color: Theme.of(context).hintColor,
           ),
         ),
+        const SizedBox(height: 4),
         AppTextField(
           hint: "",
           onChanged: (value) {},
@@ -358,10 +363,11 @@ class ManageMaterialBottomSheetState extends State<ManageMaterialBottomSheet> {
         Text(
           "Название",
           style: TextStyle(
-            fontSize: 12,
+            fontSize: 15,
             color: Theme.of(context).hintColor,
           ),
         ),
+        const SizedBox(height: 4),
         AppTextField(
           hint: "",
           onChanged: (value) {},
@@ -431,10 +437,11 @@ class ManageBuildersBottomSheetState extends State<ManageBuildersBottomSheet> {
         Text(
           "Название",
           style: TextStyle(
-            fontSize: 12,
+            fontSize: 15,
             color: Theme.of(context).hintColor,
           ),
         ),
+        const SizedBox(height: 4),
         AppTextField(
           hint: "",
           onChanged: (value) {},
@@ -444,10 +451,11 @@ class ManageBuildersBottomSheetState extends State<ManageBuildersBottomSheet> {
         Text(
           "Кол-во строителей",
           style: TextStyle(
-            fontSize: 12,
+            fontSize: 15,
             color: Theme.of(context).hintColor,
           ),
         ),
+        const SizedBox(height: 4),
         AppTextField(
           hint: "",
           onChanged: (value) {},

@@ -194,9 +194,7 @@ class BuilderGroupCard extends StatelessWidget {
                       style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w500),
                       softWrap: true,
                     ),
-                    const SizedBox(
-                      height: 4,
-                    ),
+                    const SizedBox(height: 4),
                     Text(
                       "Количество строителей: ${builderGroup.count}",
                       style: const TextStyle(fontSize: 14),

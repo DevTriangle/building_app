@@ -120,7 +120,7 @@ class MaterialsScreenState extends State<MaterialsScreen> {
                     return Expanded(
                       child: Center(
                         child: Text(
-                          "Заметок нет.",
+                          "Материалы отсутствуют!",
                           style: TextStyle(fontSize: 18),
                         ),
                       ),
@@ -130,7 +130,7 @@ class MaterialsScreenState extends State<MaterialsScreen> {
                   return Expanded(
                     child: Center(
                       child: Text(
-                        "Заметок нет.",
+                        "Материалы отсутствуют.",
                         style: TextStyle(fontSize: 18),
                       ),
                     ),

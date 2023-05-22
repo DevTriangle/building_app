@@ -124,7 +124,7 @@ class BuilderGroupListScreenState extends State<BuilderGroupListScreen> {
                     return Expanded(
                       child: Center(
                         child: Text(
-                          "Заметок нет.",
+                          "Бригады отсутствуют!",
                           style: TextStyle(fontSize: 18),
                         ),
                       ),
@@ -134,7 +134,7 @@ class BuilderGroupListScreenState extends State<BuilderGroupListScreen> {
                   return Expanded(
                     child: Center(
                       child: Text(
-                        "Заметок нет.",
+                        "Бригады отсутствуют!",
                         style: TextStyle(fontSize: 18),
                       ),
                     ),

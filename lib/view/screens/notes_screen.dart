@@ -55,6 +55,7 @@ class NotesScreenState extends State<NotesScreen> {
           preferredSize: const Size.fromHeight(50),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               const Padding(
                 padding: EdgeInsets.only(left: 16, right: 16),
@@ -76,54 +77,63 @@ class NotesScreenState extends State<NotesScreen> {
           future: viewModel.loadNotes(),
           builder: (fContext, snapshot) {
             if (snapshot.hasData) {
-              return ListView.builder(
-                itemCount: viewModel.notes.length,
-                itemBuilder: (itemBuilder, index) {
-                  return NoteCard(
-                    note: viewModel.notes[index],
-                    onTap: () {
-                      showModalBottomSheet(
-                        context: context,
-                        isScrollControlled: true,
-                        builder: (builder) {
-                          return ManageNoteBottomSheet(
-                            title: viewModel.notes[index].title,
-                            text: viewModel.notes[index].text,
-                            isEditing: true,
-                            onSave: (note, isEditing) async {
-                              if (isEditing) {
+              if (snapshot.data!.isNotEmpty) {
+                return ListView.builder(
+                  itemCount: viewModel.notes.length,
+                  itemBuilder: (itemBuilder, index) {
+                    return NoteCard(
+                      note: viewModel.notes[index],
+                      onTap: () {
+                        showModalBottomSheet(
+                          context: context,
+                          isScrollControlled: true,
+                          builder: (builder) {
+                            return ManageNoteBottomSheet(
+                              title: viewModel.notes[index].title,
+                              text: viewModel.notes[index].text,
+                              isEditing: true,
+                              onSave: (note, isEditing) async {
+                                if (isEditing) {
+                                  viewModel.notes.removeAt(index);
+                                  viewModel.notes.insert(index, note);
+                                } else {
+                                  viewModel.notes.add(note);
+                                }
+
+                                await viewModel.saveNotes();
+
+                                setState(() {});
+
+                                Navigator.pop(context);
+                              },
+                              onRemove: () async {
                                 viewModel.notes.removeAt(index);
-                                viewModel.notes.insert(index, note);
-                              } else {
-                                viewModel.notes.add(note);
-                              }
 
-                              await viewModel.saveNotes();
+                                await viewModel.saveNotes();
 
-                              setState(() {});
+                                setState(() {});
 
-                              Navigator.pop(context);
-                            },
-                            onRemove: () async {
-                              viewModel.notes.removeAt(index);
-
-                              await viewModel.saveNotes();
-
-                              setState(() {});
-
-                              Navigator.pop(context);
-                            },
-                          );
-                        },
-                      );
-                    },
-                  );
-                },
-              );
+                                Navigator.pop(context);
+                              },
+                            );
+                          },
+                        );
+                      },
+                    );
+                  },
+                );
+              } else {
+                return const Center(
+                  child: Text(
+                    "Заметки отсутствуют!",
+                    style: TextStyle(fontSize: 18),
+                  ),
+                );
+              }
             } else {
               return const Center(
                 child: Text(
-                  "Заметок нет.",
+                  "Заметки отсутствуют!",
                   style: TextStyle(fontSize: 18),
                 ),
               );

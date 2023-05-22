@@ -120,7 +120,10 @@ class RBuildingsScreenState extends State<RBuildingsScreen> {
                     } else {
                       return Expanded(
                         child: Center(
-                          child: Text("Готовые постройки отсутствуют!"),
+                          child: Text(
+                            "Готовые постройки отсутствуют!",
+                            style: TextStyle(fontSize: 18),
+                          ),
                         ),
                       );
                     }
