@@ -1,3 +1,4 @@
+import 'package:building_app/view/screens/materials_screen.dart';
 import 'package:building_app/view/screens/r_buildings_screen.dart';
 import 'package:building_app/view/widgets/app_button.dart';
 import 'package:flutter/cupertino.dart';
@@ -54,7 +55,9 @@ class BuildingsScreenState extends State<BuildingsScreen> {
             BuildingsButton(
               icon: Icons.settings_rounded,
               label: "Выбрать материал",
-              onTap: () {},
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (b) => MaterialsScreen()));
+              },
             ),
           ],
         ),
