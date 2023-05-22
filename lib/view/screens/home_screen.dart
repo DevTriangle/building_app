@@ -1,5 +1,6 @@
 import 'package:building_app/view/colors.dart';
 import 'package:building_app/view/screens/buildings_screen.dart';
+import 'package:building_app/view/screens/notes_screen.dart';
 import 'package:flutter/material.dart';
 
 import 'builder_group_list.dart';
@@ -15,6 +16,7 @@ class HomeScreenState extends State<HomeScreen> {
   final List<Widget> _screens = [
     const BuildingsScreen(),
     const BuilderGroupListScreen(),
+    const NotesScreen(),
   ];
   int _selectedScreen = 0;
 
@@ -41,11 +43,15 @@ class HomeScreenState extends State<HomeScreen> {
             items: const [
               BottomNavigationBarItem(
                 icon: Icon(Icons.home_rounded),
-                label: "Строительные сооружения",
+                label: "Сооружения",
               ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.people_alt_rounded),
                 label: "Список строителей",
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.notes_rounded),
+                label: "Заметки",
               ),
             ],
           ),

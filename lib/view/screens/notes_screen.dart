@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 
 import '../widgets/app_bottom_sheet.dart';
 import '../widgets/app_card.dart';
+import 'info_screen.dart';
 
 class NotesScreen extends StatefulWidget {
   const NotesScreen({super.key});
@@ -55,19 +56,19 @@ class NotesScreenState extends State<NotesScreen> {
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              IconButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                icon: const Icon(Icons.arrow_back_ios_new_rounded),
-              ),
               const Padding(
                 padding: EdgeInsets.only(left: 16, right: 16),
                 child: Text(
                   "Заметки",
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
                 ),
-              )
+              ),
+              IconButton(
+                onPressed: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (builder) => const InfoScreen()));
+                },
+                icon: const Icon(Icons.info_rounded),
+              ),
             ],
           ),
         ),
