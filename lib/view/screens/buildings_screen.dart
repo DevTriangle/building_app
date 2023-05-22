@@ -1,7 +1,6 @@
 import 'package:building_app/view/screens/materials_screen.dart';
 import 'package:building_app/view/screens/r_buildings_screen.dart';
 import 'package:building_app/view/widgets/app_button.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'info_screen.dart';
@@ -31,7 +30,7 @@ class BuildingsScreenState extends State<BuildingsScreen> {
             ),
             IconButton(
               onPressed: () {
-                Navigator.push(context, MaterialPageRoute(builder: (builder) => InfoScreen()));
+                Navigator.push(context, MaterialPageRoute(builder: (builder) => const InfoScreen()));
               },
               icon: const Icon(Icons.info_rounded),
             ),
@@ -48,15 +47,15 @@ class BuildingsScreenState extends State<BuildingsScreen> {
               icon: Icons.holiday_village_rounded,
               label: "Готовые постройки",
               onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (b) => RBuildingsScreen()));
+                Navigator.push(context, MaterialPageRoute(builder: (b) => const RBuildingsScreen()));
               },
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             BuildingsButton(
               icon: Icons.settings_rounded,
               label: "Выбрать материал",
               onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (b) => MaterialsScreen()));
+                Navigator.push(context, MaterialPageRoute(builder: (b) => const MaterialsScreen()));
               },
             ),
           ],

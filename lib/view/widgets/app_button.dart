@@ -28,10 +28,10 @@ class BuildingsButton extends StatelessWidget {
                     icon,
                     size: 50,
                   ),
-                  SizedBox(height: 16),
+                  const SizedBox(height: 16),
                   Text(
                     label,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 20,
                     ),
                   )

@@ -6,6 +6,8 @@ import 'package:provider/provider.dart';
 import '../../viewmodel/home_viewmodel.dart';
 
 class MaterialsScreen extends StatefulWidget {
+  const MaterialsScreen({super.key});
+
   @override
   State<StatefulWidget> createState() => MaterialsScreenState();
 }
@@ -51,7 +53,7 @@ class MaterialsScreenState extends State<MaterialsScreen> {
                   return MaterialCard(
                     material: viewModel.materials[index],
                     onTap: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (builder) => NotesScreen()));
+                      Navigator.push(context, MaterialPageRoute(builder: (builder) => const NotesScreen()));
                     },
                   );
                 },

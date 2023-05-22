@@ -3,7 +3,6 @@ import 'package:building_app/view/screens/buildings_screen.dart';
 import 'package:flutter/material.dart';
 
 import 'builder_group_list.dart';
-import 'info_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -14,8 +13,8 @@ class HomeScreen extends StatefulWidget {
 
 class HomeScreenState extends State<HomeScreen> {
   final List<Widget> _screens = [
-    BuildingsScreen(),
-    BuilderGroupListScreen(),
+    const BuildingsScreen(),
+    const BuilderGroupListScreen(),
   ];
   int _selectedScreen = 0;
 
@@ -37,7 +36,7 @@ class HomeScreenState extends State<HomeScreen> {
               _selectedScreen = value;
               setState(() {});
             },
-            items: [
+            items: const [
               BottomNavigationBarItem(
                 icon: Icon(Icons.home_rounded),
                 label: "Строительные сооружения",

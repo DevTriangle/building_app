@@ -48,7 +48,7 @@ class NotesScreenState extends State<NotesScreen> {
                   return NoteCard(note: notes[index], onTap: () {});
                 },
               )
-            : Center(
+            : const Center(
                 child: Text(
                   "Заметок нет.",
                   style: TextStyle(fontSize: 18),

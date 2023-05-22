@@ -1,4 +1,3 @@
-import 'package:building_app/view/screens/notes_screen.dart';
 import 'package:building_app/view/widgets/app_card.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -41,7 +40,7 @@ class BuilderGroupListScreenState extends State<BuilderGroupListScreen> {
               ),
               IconButton(
                 onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (builder) => InfoScreen()));
+                  Navigator.push(context, MaterialPageRoute(builder: (builder) => const InfoScreen()));
                 },
                 icon: const Icon(Icons.info_rounded),
               ),

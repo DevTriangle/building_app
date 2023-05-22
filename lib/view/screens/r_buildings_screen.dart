@@ -53,7 +53,7 @@ class RBuildingsScreenState extends State<RBuildingsScreen> {
                   return BuildingCard(
                     building: viewModel.buildings[index],
                     onTap: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (builder) => NotesScreen()));
+                      Navigator.push(context, MaterialPageRoute(builder: (builder) => const NotesScreen()));
                     },
                   );
                 },

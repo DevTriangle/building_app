@@ -23,7 +23,7 @@ class InfoScreenState extends State<InfoScreen> {
                 },
                 icon: const Icon(Icons.arrow_back_ios_new_rounded),
               ),
-              Text(
+              const Text(
                 "Cправочная информация",
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
               ),
@@ -55,7 +55,7 @@ class InfoScreenState extends State<InfoScreen> {
                   "assets/images/logo.svg",
                   height: 70,
                 ),
-                SizedBox(height: 5),
+                const SizedBox(height: 5),
                 const Text(
                   "Объекты недвижимости",
                   style: TextStyle(
