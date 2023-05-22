@@ -85,54 +85,51 @@ class ManageNoteBottomSheetState extends State<ManageNoteBottomSheet> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: MediaQuery.of(context).viewInsets,
-      child: Wrap(
-        children: [
-          BottomSheetCard(
-            label: "Новое событие",
-            children: [
-              Text(
-                "Заголовок",
-                style: TextStyle(fontSize: 15, color: Theme.of(context).hintColor),
-              ),
-              SizedBox(height: 4),
-              AppTextField(
-                hint: "",
-                onChanged: (value) {
-                  _title = value;
-                },
-                controller: _titleController,
-              ),
-              SizedBox(height: 8),
-              Text(
-                "Текст",
-                style: TextStyle(fontSize: 15, color: Theme.of(context).hintColor),
-              ),
-              SizedBox(height: 4),
-              AppTextField(
-                hint: "",
-                onChanged: (value) {
-                  _text = value;
-                },
-                controller: _textController,
-                inputType: TextInputType.multiline,
-                textInputAction: TextInputAction.newline,
-              ),
-              SizedBox(height: 8),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  TextButton(
-                    onPressed: () {},
-                    child: Text("Добавить"),
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ],
-      ),
+    return Wrap(
+      children: [
+        BottomSheetCard(
+          label: "Новое событие",
+          children: [
+            Text(
+              "Заголовок",
+              style: TextStyle(fontSize: 15, color: Theme.of(context).hintColor),
+            ),
+            SizedBox(height: 4),
+            AppTextField(
+              hint: "",
+              onChanged: (value) {
+                _title = value;
+              },
+              controller: _titleController,
+            ),
+            SizedBox(height: 8),
+            Text(
+              "Текст",
+              style: TextStyle(fontSize: 15, color: Theme.of(context).hintColor),
+            ),
+            SizedBox(height: 4),
+            AppTextField(
+              hint: "",
+              onChanged: (value) {
+                _text = value;
+              },
+              controller: _textController,
+              inputType: TextInputType.multiline,
+              textInputAction: TextInputAction.newline,
+            ),
+            SizedBox(height: 8),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                TextButton(
+                  onPressed: () {},
+                  child: Text("Добавить"),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ],
     );
   }
 }
