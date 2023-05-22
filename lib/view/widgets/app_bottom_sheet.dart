@@ -1,6 +1,10 @@
+import 'dart:math';
+
+import 'package:building_app/model/material.dart';
 import 'package:building_app/view/widgets/app_text_field.dart';
 import 'package:flutter/material.dart';
 
+import '../../model/building.dart';
 import '../shapes.dart';
 
 class BottomSheetCard extends StatelessWidget {
@@ -139,7 +143,16 @@ class ManageNoteBottomSheetState extends State<ManageNoteBottomSheet> {
 }
 
 class ManageBuildingBottomSheet extends StatefulWidget {
-  const ManageBuildingBottomSheet({super.key});
+  final Building? building;
+  final Function(Building) onSavePressed;
+  final Function()? onDeletePressed;
+
+  const ManageBuildingBottomSheet({
+    super.key,
+    this.building,
+    required this.onSavePressed,
+    this.onDeletePressed,
+  });
 
   @override
   State<StatefulWidget> createState() => ManageBuildingBottomSheetState();
@@ -147,13 +160,28 @@ class ManageBuildingBottomSheet extends StatefulWidget {
 
 class ManageBuildingBottomSheetState extends State<ManageBuildingBottomSheet> {
   final _name = TextEditingController();
+  final _image = TextEditingController();
   final _roomCount = TextEditingController();
   final _square = TextEditingController();
+  final _price = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+
+    if (widget.building != null) {
+      _name.text = widget.building!.label;
+      _image.text = widget.building!.image;
+      _roomCount.text = widget.building!.roomCount.toString();
+      _square.text = widget.building!.square.toString();
+      _price.text = widget.building!.price.toString();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return BottomSheetCard(
-      label: "Создание постройки",
+      label: widget.building != null ? "Редактирование постройки" : "Создание постройки",
       children: [
         Text(
           "Название",
@@ -164,8 +192,21 @@ class ManageBuildingBottomSheetState extends State<ManageBuildingBottomSheet> {
         ),
         AppTextField(
           hint: "",
-          onChanged: () {},
+          onChanged: (value) {},
           controller: _name,
+        ),
+        const SizedBox(height: 8),
+        Text(
+          "Изображение (url)",
+          style: TextStyle(
+            fontSize: 12,
+            color: Theme.of(context).hintColor,
+          ),
+        ),
+        AppTextField(
+          hint: "",
+          onChanged: (value) {},
+          controller: _image,
         ),
         const SizedBox(height: 8),
         Text(
@@ -177,8 +218,9 @@ class ManageBuildingBottomSheetState extends State<ManageBuildingBottomSheet> {
         ),
         AppTextField(
           hint: "",
-          onChanged: () {},
+          onChanged: (value) {},
           controller: _roomCount,
+          inputType: TextInputType.number,
         ),
         const SizedBox(height: 8),
         Text(
@@ -190,15 +232,120 @@ class ManageBuildingBottomSheetState extends State<ManageBuildingBottomSheet> {
         ),
         AppTextField(
           hint: "",
-          onChanged: () {},
+          onChanged: (value) {},
           controller: _square,
+          inputType: TextInputType.number,
+        ),
+        const SizedBox(height: 8),
+        Text(
+          "Цена",
+          style: TextStyle(
+            fontSize: 12,
+            color: Theme.of(context).hintColor,
+          ),
+        ),
+        AppTextField(
+          hint: "",
+          onChanged: (value) {},
+          controller: _price,
+          inputType: TextInputType.number,
         ),
         const SizedBox(height: 8),
         Row(
-          mainAxisAlignment: MainAxisAlignment.end,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
+            widget.building != null
+                ? TextButton(
+                    onPressed: () {
+                      widget.onDeletePressed!();
+                    },
+                    child: Text("Удалить"),
+                    style: ButtonStyle(foregroundColor: MaterialStateProperty.all(Theme.of(context).errorColor)),
+                  )
+                : SizedBox(),
             TextButton(
-              onPressed: () {},
+              onPressed: () {
+                widget.onSavePressed(
+                  Building(
+                    _name.text,
+                    _image.text,
+                    int.parse(_roomCount.text),
+                    double.parse(_square.text),
+                    double.parse(_price.text),
+                  ),
+                );
+              },
+              child: Text("Сохранить"),
+            )
+          ],
+        ),
+      ],
+    );
+  }
+}
+
+class ManageMaterialBottomSheet extends StatefulWidget {
+  final AppMaterial? material;
+  final Function(AppMaterial) onSavePressed;
+  final Function()? onDeletePressed;
+
+  const ManageMaterialBottomSheet({
+    super.key,
+    this.material,
+    required this.onSavePressed,
+    this.onDeletePressed,
+  });
+
+  @override
+  State<StatefulWidget> createState() => ManageMaterialBottomSheetState();
+}
+
+class ManageMaterialBottomSheetState extends State<ManageMaterialBottomSheet> {
+  final _name = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+
+    if (widget.material != null) {
+      _name.text = widget.material!.name;
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return BottomSheetCard(
+      label: widget.material != null ? "Редактирование материала" : "Создание материала",
+      children: [
+        Text(
+          "Название",
+          style: TextStyle(
+            fontSize: 12,
+            color: Theme.of(context).hintColor,
+          ),
+        ),
+        AppTextField(
+          hint: "",
+          onChanged: (value) {},
+          controller: _name,
+        ),
+        const SizedBox(height: 8),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            widget.material != null
+                ? TextButton(
+                    onPressed: () {
+                      widget.onDeletePressed!();
+                    },
+                    child: Text("Удалить"),
+                    style: ButtonStyle(foregroundColor: MaterialStateProperty.all(Theme.of(context).errorColor)),
+                  )
+                : SizedBox(),
+            TextButton(
+              onPressed: () {
+                widget.onSavePressed(AppMaterial(Random().nextInt(9999999), _name.text));
+              },
               child: Text("Сохранить"),
             )
           ],

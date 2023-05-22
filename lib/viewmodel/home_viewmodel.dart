@@ -9,20 +9,12 @@ import '../model/builder_group.dart';
 
 class HomeViewModel extends ChangeNotifier {
   final List<Building> buildings = [];
-
-  final List<AppMaterial> materials = [
-    AppMaterial(0, "Кирпич"),
-    AppMaterial(1, "Дерево"),
-    AppMaterial(2, "Блок цементный фундаментный полнотелый"),
-  ];
-
-  final List<BuilderGroup> builderGroups = [
-    BuilderGroup("Бригада №1", 2),
-    BuilderGroup("Бригада №2", 4),
-    BuilderGroup("Бригада №3", 7),
-  ];
+  final List<AppMaterial> materials = [];
+  final List<BuilderGroup> builderGroups = [];
 
   Future<List<Building>> loadBuildings() async {
+    buildings.clear();
+
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
 
     String? bJson = sharedPreferences.getString("buildings");
@@ -33,5 +25,32 @@ class HomeViewModel extends ChangeNotifier {
     }
 
     return buildings;
+  }
+
+  Future<void> saveBuildings() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+
+    await sharedPreferences.setString("buildings", jsonEncode(buildings.map((e) => e.toJson()).toList()));
+  }
+
+  Future<List<Building>> loadMaterials() async {
+    materials.clear();
+
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+
+    String? mJson = sharedPreferences.getString("materials");
+    if (mJson != null) {
+      Iterable list = json.decode(mJson);
+
+      materials.addAll(List.from(list.map((e) => AppMaterial.fromJson(e))));
+    }
+
+    return buildings;
+  }
+
+  Future<void> saveMaterials() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+
+    await sharedPreferences.setString("materials", jsonEncode(materials.map((e) => e.toJson()).toList()));
   }
 }

@@ -31,17 +31,25 @@ class RBuildingsScreenState extends State<RBuildingsScreen> {
         floatingActionButton: FloatingActionButton(
           onPressed: () {
             showModalBottomSheet(
-                isScrollControlled: true,
-                shape: const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(16),
-                    topRight: Radius.circular(16),
-                  ),
+              isScrollControlled: true,
+              shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(16),
+                  topRight: Radius.circular(16),
                 ),
-                context: context,
-                builder: (b) {
-                  return ManageBuildingBottomSheet();
-                });
+              ),
+              context: context,
+              builder: (b) {
+                return ManageBuildingBottomSheet(
+                  onSavePressed: (building) async {
+                    Navigator.pop(context);
+                    viewModel.buildings.add(building);
+                    viewModel.saveBuildings();
+                    setState(() {});
+                  },
+                );
+              },
+            );
           },
           child: const Icon(Icons.add_rounded),
         ),
@@ -64,20 +72,62 @@ class RBuildingsScreenState extends State<RBuildingsScreen> {
         ),
         body: Column(
           children: [
-            Expanded(
-              child: ListView.builder(
-                physics: const BouncingScrollPhysics(),
-                itemCount: viewModel.buildings.length,
-                itemBuilder: (b, index) {
-                  return BuildingCard(
-                    building: viewModel.buildings[index],
-                    onTap: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (builder) => const NotesScreen()));
-                    },
-                  );
-                },
-              ),
-            ),
+            FutureBuilder(
+                future: viewModel.loadBuildings(),
+                builder: (context, snapshot) {
+                  if (snapshot.data != null) {
+                    if (snapshot.data!.length > 0) {
+                      return Expanded(
+                        child: ListView.builder(
+                          physics: const BouncingScrollPhysics(),
+                          itemCount: viewModel.buildings.length,
+                          itemBuilder: (b, index) {
+                            return BuildingCard(
+                              building: viewModel.buildings[index],
+                              onTap: () {
+                                showModalBottomSheet(
+                                  isScrollControlled: true,
+                                  shape: const RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.only(
+                                      topLeft: Radius.circular(16),
+                                      topRight: Radius.circular(16),
+                                    ),
+                                  ),
+                                  context: context,
+                                  builder: (b) {
+                                    return ManageBuildingBottomSheet(
+                                      building: viewModel.buildings[index],
+                                      onSavePressed: (building) async {
+                                        Navigator.pop(context);
+                                        viewModel.buildings[index] = building;
+                                        viewModel.saveBuildings();
+                                        setState(() {});
+                                      },
+                                      onDeletePressed: () {
+                                        Navigator.pop(context);
+                                        viewModel.buildings.removeAt(index);
+                                        viewModel.saveBuildings();
+                                        setState(() {});
+                                      },
+                                    );
+                                  },
+                                );
+                              },
+                            );
+                          },
+                        ),
+                      );
+                    } else {
+                      return Expanded(
+                        child: Center(
+                          child: Text("Готовые постройки отсутствуют!"),
+                        ),
+                      );
+                    }
+                  } else {
+                    return SizedBox();
+                  }
+                }),
           ],
         ),
       ),

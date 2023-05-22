@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../viewmodel/home_viewmodel.dart';
+import '../widgets/app_bottom_sheet.dart';
 
 class MaterialsScreen extends StatefulWidget {
   const MaterialsScreen({super.key});
@@ -26,6 +27,31 @@ class MaterialsScreenState extends State<MaterialsScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            showModalBottomSheet(
+              isScrollControlled: true,
+              shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(16),
+                  topRight: Radius.circular(16),
+                ),
+              ),
+              context: context,
+              builder: (b) {
+                return ManageMaterialBottomSheet(
+                  onSavePressed: (m) async {
+                    Navigator.pop(context);
+                    viewModel.materials.add(m);
+                    viewModel.saveMaterials();
+                    setState(() {});
+                  },
+                );
+              },
+            );
+          },
+          child: const Icon(Icons.add_rounded),
+        ),
         appBar: PreferredSize(
           preferredSize: const Size.fromHeight(50),
           child: Row(
@@ -45,19 +71,66 @@ class MaterialsScreenState extends State<MaterialsScreen> {
         ),
         body: Column(
           children: [
-            Expanded(
-              child: ListView.builder(
-                physics: const BouncingScrollPhysics(),
-                itemCount: viewModel.materials.length,
-                itemBuilder: (b, index) {
-                  return MaterialCard(
-                    material: viewModel.materials[index],
-                    onTap: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (builder) => const NotesScreen()));
-                    },
+            FutureBuilder(
+              future: viewModel.loadMaterials(),
+              builder: (context, snapshot) {
+                if (snapshot.data != null) {
+                  if (snapshot.data!.length > 0) {
+                    return Expanded(
+                      child: ListView.builder(
+                        physics: const BouncingScrollPhysics(),
+                        itemCount: viewModel.materials.length,
+                        itemBuilder: (b, index) {
+                          return MaterialCard(
+                            material: viewModel.materials[index],
+                            onTap: () {
+                              showModalBottomSheet(
+                                isScrollControlled: true,
+                                shape: const RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(16),
+                                    topRight: Radius.circular(16),
+                                  ),
+                                ),
+                                context: context,
+                                builder: (b) {
+                                  return ManageMaterialBottomSheet(
+                                    material: viewModel.materials[index],
+                                    onSavePressed: (m) {
+                                      Navigator.pop(context);
+                                      viewModel.materials.add(m);
+                                      viewModel.saveMaterials();
+                                      setState(() {});
+                                    },
+                                    onDeletePressed: () {
+                                      Navigator.pop(context);
+                                      viewModel.materials.removeAt(index);
+                                      viewModel.saveMaterials();
+                                      setState(() {});
+                                    },
+                                  );
+                                },
+                              );
+                            },
+                          );
+                        },
+                      ),
+                    );
+                  } else {
+                    return Expanded(
+                      child: Center(
+                        child: Text("Материалы отсутствуют!"),
+                      ),
+                    );
+                  }
+                } else {
+                  return Expanded(
+                    child: Center(
+                      child: Text("Материалы отсутствуют!"),
+                    ),
                   );
-                },
-              ),
+                }
+              },
             ),
           ],
         ),
