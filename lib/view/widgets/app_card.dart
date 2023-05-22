@@ -85,13 +85,13 @@ class MaterialCard extends StatelessWidget {
                 width: MediaQuery.of(context).size.width - 94,
                 child: Text(
                   material.name,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.w500,
                   ),
                 ),
               ),
-              Icon(
+              const Icon(
                 Icons.bookmark_outline_rounded,
                 size: 30,
               )
