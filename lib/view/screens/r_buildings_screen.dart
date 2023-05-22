@@ -6,6 +6,8 @@ import 'package:provider/provider.dart';
 import 'notes_screen.dart';
 
 class RBuildingsScreen extends StatefulWidget {
+  const RBuildingsScreen({super.key});
+
   @override
   State<StatefulWidget> createState() => RBuildingsScreenState();
 }
@@ -58,7 +60,7 @@ class RBuildingsScreenState extends State<RBuildingsScreen> {
                             Navigator.push(context, MaterialPageRoute(builder: (builder) => NotesScreen()));
                           },
                         ),
-                        SizedBox(height: 8),
+                        const SizedBox(height: 8),
                       ],
                     );
                   },
