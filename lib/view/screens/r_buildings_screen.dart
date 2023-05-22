@@ -1,3 +1,5 @@
+import 'package:building_app/view/colors.dart';
+import 'package:building_app/view/widgets/app_bottom_sheet.dart';
 import 'package:building_app/view/widgets/app_card.dart';
 import 'package:building_app/viewmodel/home_viewmodel.dart';
 import 'package:flutter/material.dart';
@@ -26,6 +28,24 @@ class RBuildingsScreenState extends State<RBuildingsScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            showModalBottomSheet(
+                backgroundColor: AppColors.backgroundColor,
+                useSafeArea: true,
+                shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(16),
+                    topRight: Radius.circular(16),
+                  ),
+                ),
+                context: context,
+                builder: (b) {
+                  return ManageBuildingBottomSheet();
+                });
+          },
+          child: const Icon(Icons.add_rounded),
+        ),
         appBar: PreferredSize(
           preferredSize: const Size.fromHeight(50),
           child: Row(

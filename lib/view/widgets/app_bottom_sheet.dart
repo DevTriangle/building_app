@@ -133,3 +133,73 @@ class ManageNoteBottomSheetState extends State<ManageNoteBottomSheet> {
     );
   }
 }
+
+class ManageBuildingBottomSheet extends StatefulWidget {
+  const ManageBuildingBottomSheet({super.key});
+
+  @override
+  State<StatefulWidget> createState() => ManageBuildingBottomSheetState();
+}
+
+class ManageBuildingBottomSheetState extends State<ManageBuildingBottomSheet> {
+  final _name = TextEditingController();
+  final _roomCount = TextEditingController();
+  final _square = TextEditingController();
+
+  @override
+  Widget build(BuildContext context) {
+    return BottomSheetCard(
+      label: "Создание постройки",
+      children: [
+        Text(
+          "Название",
+          style: TextStyle(
+            fontSize: 12,
+            color: Theme.of(context).hintColor,
+          ),
+        ),
+        AppTextField(
+          hint: "",
+          onChanged: () {},
+          controller: _name,
+        ),
+        const SizedBox(height: 8),
+        Text(
+          "Кол-во комнат",
+          style: TextStyle(
+            fontSize: 12,
+            color: Theme.of(context).hintColor,
+          ),
+        ),
+        AppTextField(
+          hint: "",
+          onChanged: () {},
+          controller: _roomCount,
+        ),
+        const SizedBox(height: 8),
+        Text(
+          "Площадь",
+          style: TextStyle(
+            fontSize: 12,
+            color: Theme.of(context).hintColor,
+          ),
+        ),
+        AppTextField(
+          hint: "",
+          onChanged: () {},
+          controller: _square,
+        ),
+        const SizedBox(height: 8),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            TextButton(
+              onPressed: () {},
+              child: Text("Сохранить"),
+            )
+          ],
+        ),
+      ],
+    );
+  }
+}
