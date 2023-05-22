@@ -43,7 +43,7 @@ class BuilderGroupListScreenState extends State<BuilderGroupListScreen> {
                   onSavePressed: (b) async {
                     Navigator.pop(context);
                     viewModel.builderGroups.add(b);
-                    viewModel.saveBuildings();
+                    viewModel.saveBuilders();
                     setState(() {});
                   },
                 );
