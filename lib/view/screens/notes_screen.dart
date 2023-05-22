@@ -1,5 +1,7 @@
 import 'package:building_app/model/note.dart';
+import 'package:building_app/viewmodel/notes_viewmodel.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../widgets/app_bottom_sheet.dart';
 import '../widgets/app_card.dart';
@@ -12,12 +14,14 @@ class NotesScreen extends StatefulWidget {
 }
 
 class NotesScreenState extends State<NotesScreen> {
-  List<Note> notes = [
-    Note("title", "text"),
-    Note("title", "texttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttext"),
-    Note("title",
-        "texttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttext"),
-  ];
+  late NotesViewModel viewModel;
+
+  @override
+  void initState() {
+    super.initState();
+
+    viewModel = Provider.of<NotesViewModel>(context, listen: false);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,13 +30,23 @@ class NotesScreenState extends State<NotesScreen> {
         floatingActionButton: FloatingActionButton(
           onPressed: () {
             showModalBottomSheet(
-                context: context,
-                builder: (builder) {
-                  return Padding(
-                    padding: MediaQuery.of(context).viewInsets,
-                    child: ManageNoteBottomSheet(),
-                  );
-                });
+              context: context,
+              isScrollControlled: true,
+              builder: (builder) {
+                return ManageNoteBottomSheet(
+                  onSave: (note, _) async {
+                    viewModel.notes.add(note);
+
+                    await viewModel.saveNotes();
+
+                    setState(() {});
+
+                    Navigator.pop(context);
+                  },
+                  onRemove: () {},
+                );
+              },
+            );
           },
           child: Icon(Icons.add_rounded),
         ),
@@ -57,19 +71,64 @@ class NotesScreenState extends State<NotesScreen> {
             ],
           ),
         ),
-        body: notes.isNotEmpty
-            ? ListView.builder(
-                itemCount: notes.length,
+        body: FutureBuilder(
+          future: viewModel.loadNotes(),
+          builder: (fContext, snapshot) {
+            if (snapshot.hasData) {
+              return ListView.builder(
+                itemCount: viewModel.notes.length,
                 itemBuilder: (itemBuilder, index) {
-                  return NoteCard(note: notes[index], onTap: () {});
+                  return NoteCard(
+                    note: viewModel.notes[index],
+                    onTap: () {
+                      showModalBottomSheet(
+                        context: context,
+                        isScrollControlled: true,
+                        builder: (builder) {
+                          return ManageNoteBottomSheet(
+                            title: viewModel.notes[index].title,
+                            text: viewModel.notes[index].text,
+                            isEditing: true,
+                            onSave: (note, isEditing) async {
+                              if (isEditing) {
+                                viewModel.notes.removeAt(index);
+                                viewModel.notes.insert(index, note);
+                              } else {
+                                viewModel.notes.add(note);
+                              }
+
+                              await viewModel.saveNotes();
+
+                              setState(() {});
+
+                              Navigator.pop(context);
+                            },
+                            onRemove: () async {
+                              viewModel.notes.removeAt(index);
+
+                              await viewModel.saveNotes();
+
+                              setState(() {});
+
+                              Navigator.pop(context);
+                            },
+                          );
+                        },
+                      );
+                    },
+                  );
                 },
-              )
-            : const Center(
+              );
+            } else {
+              return const Center(
                 child: Text(
                   "Заметок нет.",
                   style: TextStyle(fontSize: 18),
                 ),
-              ),
+              );
+            }
+          },
+        ),
       ),
     );
   }

@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:building_app/model/material.dart';
+import 'package:building_app/model/note.dart';
 import 'package:building_app/view/widgets/app_text_field.dart';
 import 'package:flutter/material.dart';
 
@@ -22,7 +23,7 @@ class BottomSheetCard extends StatelessWidget {
           Card(
               margin: EdgeInsets.zero,
               elevation: 0,
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.only(topLeft: Radius.circular(16), topRight: Radius.circular(16))),
+              shape: const RoundedRectangleBorder(borderRadius: BorderRadius.only(topLeft: Radius.circular(16), topRight: Radius.circular(16))),
               color: Theme.of(context).scaffoldBackgroundColor,
               surfaceTintColor: Colors.transparent,
               clipBehavior: Clip.antiAlias,
@@ -62,11 +63,17 @@ class BottomSheetCard extends StatelessWidget {
 class ManageNoteBottomSheet extends StatefulWidget {
   final String title;
   final String text;
+  final Function(Note, bool) onSave;
+  final Function() onRemove;
+  final bool isEditing;
 
   const ManageNoteBottomSheet({
     super.key,
     this.title = "",
     this.text = "",
+    required this.onSave,
+    required this.onRemove,
+    this.isEditing = false,
   });
 
   @override
@@ -96,13 +103,13 @@ class ManageNoteBottomSheetState extends State<ManageNoteBottomSheet> {
     return Wrap(
       children: [
         BottomSheetCard(
-          label: "Новое событие",
+          label: widget.isEditing ? "Изменение события" : "Новое событие",
           children: [
             Text(
               "Заголовок",
               style: TextStyle(fontSize: 15, color: Theme.of(context).hintColor),
             ),
-            SizedBox(height: 4),
+            const SizedBox(height: 4),
             AppTextField(
               hint: "",
               onChanged: (value) {
@@ -110,28 +117,58 @@ class ManageNoteBottomSheetState extends State<ManageNoteBottomSheet> {
               },
               controller: _titleController,
             ),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             Text(
               "Текст",
               style: TextStyle(fontSize: 15, color: Theme.of(context).hintColor),
             ),
-            SizedBox(height: 4),
-            AppTextField(
-              hint: "",
-              onChanged: (value) {
-                _text = value;
-              },
-              controller: _textController,
-              inputType: TextInputType.multiline,
-              textInputAction: TextInputAction.newline,
+            const SizedBox(height: 4),
+            Container(
+              constraints: const BoxConstraints(maxHeight: 150),
+              child: AppTextField(
+                hint: "",
+                onChanged: (value) {
+                  _text = value;
+                },
+                controller: _textController,
+                inputType: TextInputType.multiline,
+                textInputAction: TextInputAction.newline,
+                maxLines: 1000,
+                minLines: 1,
+              ),
             ),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             Row(
-              mainAxisAlignment: MainAxisAlignment.end,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
+                widget.isEditing
+                    ? TextButton(
+                        onPressed: () {
+                          widget.onRemove();
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+                          child: Text(
+                            "Удалить",
+                            style: TextStyle(color: Theme.of(context).colorScheme.error),
+                          ),
+                        ),
+                      )
+                    : SizedBox(),
                 TextButton(
-                  onPressed: () {},
-                  child: Text("Добавить"),
+                  onPressed: () {
+                    widget.onSave(
+                      Note(
+                        _title.trim(),
+                        _text.trim(),
+                      ),
+                      widget.isEditing,
+                    );
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+                    child: Text(widget.isEditing ? "Изменить" : "Добавить"),
+                  ),
                 ),
               ],
             ),
