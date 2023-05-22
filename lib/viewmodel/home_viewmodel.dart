@@ -33,7 +33,7 @@ class HomeViewModel extends ChangeNotifier {
     await sharedPreferences.setString("buildings", jsonEncode(buildings.map((e) => e.toJson()).toList()));
   }
 
-  Future<List<Building>> loadMaterials() async {
+  Future<List<AppMaterial>> loadMaterials() async {
     materials.clear();
 
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
@@ -45,12 +45,33 @@ class HomeViewModel extends ChangeNotifier {
       materials.addAll(List.from(list.map((e) => AppMaterial.fromJson(e))));
     }
 
-    return buildings;
+    return materials;
   }
 
   Future<void> saveMaterials() async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
 
     await sharedPreferences.setString("materials", jsonEncode(materials.map((e) => e.toJson()).toList()));
+  }
+
+  Future<List<BuilderGroup>> loadBuilders() async {
+    builderGroups.clear();
+
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+
+    String? mJson = sharedPreferences.getString("builderGroups");
+    if (mJson != null) {
+      Iterable list = json.decode(mJson);
+
+      builderGroups.addAll(List.from(list.map((e) => BuilderGroup.fromJson(e))));
+    }
+
+    return builderGroups;
+  }
+
+  Future<void> saveBuilders() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+
+    await sharedPreferences.setString("builderGroups", jsonEncode(builderGroups.map((e) => e.toJson()).toList()));
   }
 }

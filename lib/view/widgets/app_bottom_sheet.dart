@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:building_app/model/builder_group.dart';
 import 'package:building_app/model/material.dart';
 import 'package:building_app/model/note.dart';
 import 'package:building_app/view/widgets/app_text_field.dart';
@@ -382,6 +383,92 @@ class ManageMaterialBottomSheetState extends State<ManageMaterialBottomSheet> {
             TextButton(
               onPressed: () {
                 widget.onSavePressed(AppMaterial(Random().nextInt(9999999), _name.text));
+              },
+              child: Text("Сохранить"),
+            )
+          ],
+        ),
+      ],
+    );
+  }
+}
+
+class ManageBuildersBottomSheet extends StatefulWidget {
+  final BuilderGroup? builderGroup;
+  final Function(BuilderGroup) onSavePressed;
+  final Function()? onDeletePressed;
+
+  const ManageBuildersBottomSheet({
+    super.key,
+    this.builderGroup,
+    required this.onSavePressed,
+    this.onDeletePressed,
+  });
+
+  @override
+  State<StatefulWidget> createState() => ManageBuildersBottomSheetState();
+}
+
+class ManageBuildersBottomSheetState extends State<ManageBuildersBottomSheet> {
+  final _name = TextEditingController();
+  final _count = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+
+    if (widget.builderGroup != null) {
+      _name.text = widget.builderGroup!.name;
+      _count.text = widget.builderGroup!.count.toString();
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return BottomSheetCard(
+      label: widget.builderGroup != null ? "Редактирование бригады" : "Создание бригады",
+      children: [
+        Text(
+          "Название",
+          style: TextStyle(
+            fontSize: 12,
+            color: Theme.of(context).hintColor,
+          ),
+        ),
+        AppTextField(
+          hint: "",
+          onChanged: (value) {},
+          controller: _name,
+        ),
+        const SizedBox(height: 8),
+        Text(
+          "Кол-во строителей",
+          style: TextStyle(
+            fontSize: 12,
+            color: Theme.of(context).hintColor,
+          ),
+        ),
+        AppTextField(
+          hint: "",
+          onChanged: (value) {},
+          controller: _name,
+        ),
+        const SizedBox(height: 8),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            widget.builderGroup != null
+                ? TextButton(
+                    onPressed: () {
+                      widget.onDeletePressed!();
+                    },
+                    child: Text("Удалить"),
+                    style: ButtonStyle(foregroundColor: MaterialStateProperty.all(Theme.of(context).errorColor)),
+                  )
+                : SizedBox(),
+            TextButton(
+              onPressed: () {
+                widget.onSavePressed(BuilderGroup(_name.text, int.parse(_count.text)));
               },
               child: Text("Сохранить"),
             )

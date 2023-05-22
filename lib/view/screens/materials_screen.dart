@@ -98,7 +98,7 @@ class MaterialsScreenState extends State<MaterialsScreen> {
                                     material: viewModel.materials[index],
                                     onSavePressed: (m) {
                                       Navigator.pop(context);
-                                      viewModel.materials.add(m);
+                                      viewModel.materials[index] = m;
                                       viewModel.saveMaterials();
                                       setState(() {});
                                     },
