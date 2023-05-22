@@ -11,43 +11,47 @@ class BottomSheetCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Wrap(children: [
-      Card(
-          margin: EdgeInsets.zero,
-          elevation: 0,
-          shape: AppShapes.roundedRectangleShape,
-          color: Theme.of(context).scaffoldBackgroundColor,
-          surfaceTintColor: Colors.transparent,
-          clipBehavior: Clip.antiAlias,
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
-              const SizedBox(height: 10),
-              Container(
-                width: 40,
-                height: 5,
-                decoration: BoxDecoration(
-                  borderRadius: AppShapes.borderRadius,
-                  color: Theme.of(context).hintColor.withOpacity(0.4),
-                ),
-              ),
-              label != null
-                  ? Container(
-                      margin: const EdgeInsets.symmetric(vertical: 10),
-                      child: Text(
-                        label!,
-                        style: TextStyle(color: Theme.of(context).hintColor, fontSize: 14),
-                      ),
-                    )
-                  : const SizedBox(height: 10),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: children,
-              ),
-              const SizedBox(height: 10)
-            ]),
-          ))
-    ]);
+    return SafeArea(
+      child: Padding(
+        padding: MediaQuery.of(context).viewInsets,
+        child: Wrap(children: [
+          Card(
+              margin: EdgeInsets.zero,
+              elevation: 0,
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.only(topLeft: Radius.circular(16), topRight: Radius.circular(16))),
+              color: Theme.of(context).scaffoldBackgroundColor,
+              surfaceTintColor: Colors.transparent,
+              clipBehavior: Clip.antiAlias,
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
+                  const SizedBox(height: 10),
+                  Container(
+                    width: 40,
+                    height: 5,
+                    decoration: BoxDecoration(
+                      borderRadius: AppShapes.borderRadius,
+                      color: Theme.of(context).hintColor.withOpacity(0.4),
+                    ),
+                  ),
+                  label != null
+                      ? Container(
+                          margin: const EdgeInsets.symmetric(vertical: 10),
+                          child: Text(
+                            label!,
+                            style: TextStyle(color: Theme.of(context).hintColor, fontSize: 14),
+                          ),
+                        )
+                      : const SizedBox(height: 10),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: children,
+                  ),
+                ]),
+              ))
+        ]),
+      ),
+    );
   }
 }
 

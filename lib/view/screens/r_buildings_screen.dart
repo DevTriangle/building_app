@@ -31,8 +31,7 @@ class RBuildingsScreenState extends State<RBuildingsScreen> {
         floatingActionButton: FloatingActionButton(
           onPressed: () {
             showModalBottomSheet(
-                backgroundColor: AppColors.backgroundColor,
-                useSafeArea: true,
+                isScrollControlled: true,
                 shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(16),
