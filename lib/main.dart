@@ -23,6 +23,12 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Building App',
       theme: ThemeData(
+        useMaterial3: true,
+        colorScheme: ColorScheme.light(
+          primary: AppColors.primaryColor,
+          background: AppColors.backgroundColor,
+          surface: AppColors.cardColor,
+        ),
         scaffoldBackgroundColor: AppColors.backgroundColor,
         hintColor: AppColors.hintColor,
         primaryColor: AppColors.primaryColor,

@@ -20,28 +20,38 @@ class BuildingCard extends StatelessWidget {
       child: InkWell(
         onTap: onTap,
         child: Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Ink.image(
               image: CachedNetworkImageProvider(building.image),
-              width: 100,
+              width: MediaQuery.of(context).size.width * 0.5 - 32,
               height: 100,
+              fit: BoxFit.cover,
             ),
-            Column(
-              children: [
-                Text(
-                  building.label,
-                  style: TextStyle(fontSize: 16),
-                ),
-                Text(
-                  "Кол-во комнат: ${building.roomCount}",
-                  style: TextStyle(fontSize: 16),
-                ),
-                Text(
-                  "Площадь: ${building.square} m2",
-                  style: TextStyle(fontSize: 16),
-                ),
-              ],
+            const SizedBox(width: 8),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 8),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    building.label,
+                    style: const TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                  const SizedBox(height: 4),
+                  Text(
+                    "Кол-во комнат: ${building.roomCount}",
+                    style: const TextStyle(fontSize: 14),
+                  ),
+                  Text(
+                    "Площадь: ${building.square} м2",
+                    style: const TextStyle(fontSize: 14),
+                  ),
+                ],
+              ),
             )
           ],
         ),
