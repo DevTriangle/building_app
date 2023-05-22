@@ -32,6 +32,8 @@ class HomeScreenState extends State<HomeScreen> {
             backgroundColor: AppColors.backgroundColor,
             elevation: 2,
             currentIndex: _selectedScreen,
+            selectedFontSize: 12,
+            unselectedFontSize: 10,
             onTap: (value) {
               _selectedScreen = value;
               setState(() {});
