@@ -61,7 +61,7 @@ class _AppTextFieldState extends State<AppTextField> {
               controller: widget.controller,
               inputFormatters: widget.inputFormatter,
               readOnly: widget.readOnly,
-              style: TextStyle(color: Theme.of(context).hintColor, fontWeight: FontWeight.w400, fontSize: 16),
+              style: const TextStyle(color: Colors.black, fontWeight: FontWeight.w400, fontSize: 16),
               textInputAction: widget.textInputAction,
               obscureText: widget.obscureText,
               onChanged: (text) {

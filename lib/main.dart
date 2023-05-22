@@ -1,6 +1,7 @@
 import 'package:building_app/view/screens/home_screen.dart';
 import 'package:building_app/view/colors.dart';
 import 'package:building_app/viewmodel/home_viewmodel.dart';
+import 'package:building_app/viewmodel/notes_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -9,6 +10,7 @@ void main() {
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => HomeViewModel()),
+        ChangeNotifierProvider(create: (_) => NotesViewModel()),
       ],
       child: const MyApp(),
     ),
