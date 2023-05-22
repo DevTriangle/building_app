@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../viewmodel/home_viewmodel.dart';
+import 'info_screen.dart';
 
 class BuilderGroupListScreen extends StatefulWidget {
   const BuilderGroupListScreen({super.key});
@@ -29,16 +30,20 @@ class BuilderGroupListScreenState extends State<BuilderGroupListScreen> {
         appBar: PreferredSize(
           preferredSize: const Size.fromHeight(50),
           child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
+              Padding(
+                padding: const EdgeInsets.only(left: 16.0),
+                child: Text(
+                  "Список строителей",
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+                ),
+              ),
               IconButton(
                 onPressed: () {
-                  Navigator.pop(context);
+                  Navigator.push(context, MaterialPageRoute(builder: (builder) => InfoScreen()));
                 },
-                icon: const Icon(Icons.arrow_back_ios_new_rounded),
-              ),
-              const Text(
-                "Список строителей",
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+                icon: const Icon(Icons.info_rounded),
               ),
             ],
           ),
@@ -50,11 +55,7 @@ class BuilderGroupListScreenState extends State<BuilderGroupListScreen> {
                 physics: const BouncingScrollPhysics(),
                 itemCount: viewModel.builderGroups.length,
                 itemBuilder: (b, index) {
-                  return BuilderGroupCard(
-                      builderGroup: viewModel.builderGroups[index],
-                      onTap: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (builder) => NotesScreen()));
-                      });
+                  return BuilderGroupCard(builderGroup: viewModel.builderGroups[index], onTap: () {});
                 },
               ),
             ),
