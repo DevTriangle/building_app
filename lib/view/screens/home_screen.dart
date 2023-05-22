@@ -1,8 +1,8 @@
 import 'package:building_app/view/colors.dart';
-import 'package:building_app/view/screens/builders_screen.dart';
 import 'package:building_app/view/screens/buildings_screen.dart';
 import 'package:flutter/material.dart';
 
+import 'builder_group_list.dart';
 import 'info_screen.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -15,7 +15,7 @@ class HomeScreen extends StatefulWidget {
 class HomeScreenState extends State<HomeScreen> {
   final List<Widget> _screens = [
     BuildingsScreen(),
-    BuildersScreen(),
+    BuilderGroupListScreen(),
   ];
   int _selectedScreen = 0;
 

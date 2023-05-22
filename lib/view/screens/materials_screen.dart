@@ -41,30 +41,23 @@ class MaterialsScreenState extends State<MaterialsScreen> {
             ],
           ),
         ),
-        body: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            children: [
-              Expanded(
-                child: ListView.builder(
-                  physics: const BouncingScrollPhysics(),
-                  itemCount: viewModel.materials.length,
-                  itemBuilder: (b, index) {
-                    return Column(
-                      children: [
-                        MaterialCard(
-                            material: viewModel.materials[index],
-                            onTap: () {
-                              Navigator.push(context, MaterialPageRoute(builder: (builder) => NotesScreen()));
-                            }),
-                        SizedBox(height: 8),
-                      ],
-                    );
-                  },
-                ),
+        body: Column(
+          children: [
+            Expanded(
+              child: ListView.builder(
+                physics: const BouncingScrollPhysics(),
+                itemCount: viewModel.materials.length,
+                itemBuilder: (b, index) {
+                  return MaterialCard(
+                    material: viewModel.materials[index],
+                    onTap: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (builder) => NotesScreen()));
+                    },
+                  );
+                },
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

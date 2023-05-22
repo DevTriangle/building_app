@@ -1,18 +1,18 @@
+import 'package:building_app/view/screens/notes_screen.dart';
 import 'package:building_app/view/widgets/app_card.dart';
-import 'package:building_app/viewmodel/home_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'notes_screen.dart';
+import '../../viewmodel/home_viewmodel.dart';
 
-class RBuildingsScreen extends StatefulWidget {
-  const RBuildingsScreen({super.key});
+class BuilderGroupListScreen extends StatefulWidget {
+  const BuilderGroupListScreen({super.key});
 
   @override
-  State<StatefulWidget> createState() => RBuildingsScreenState();
+  State<StatefulWidget> createState() => BuilderGroupListScreenState();
 }
 
-class RBuildingsScreenState extends State<RBuildingsScreen> {
+class BuilderGroupListScreenState extends State<BuilderGroupListScreen> {
   late HomeViewModel viewModel;
 
   @override
@@ -37,7 +37,7 @@ class RBuildingsScreenState extends State<RBuildingsScreen> {
                 icon: const Icon(Icons.arrow_back_ios_new_rounded),
               ),
               const Text(
-                "Готовые постройки",
+                "Список строителей",
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
               ),
             ],
@@ -48,14 +48,13 @@ class RBuildingsScreenState extends State<RBuildingsScreen> {
             Expanded(
               child: ListView.builder(
                 physics: const BouncingScrollPhysics(),
-                itemCount: viewModel.buildings.length,
+                itemCount: viewModel.builderGroups.length,
                 itemBuilder: (b, index) {
-                  return BuildingCard(
-                    building: viewModel.buildings[index],
-                    onTap: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (builder) => NotesScreen()));
-                    },
-                  );
+                  return BuilderGroupCard(
+                      builderGroup: viewModel.builderGroups[index],
+                      onTap: () {
+                        Navigator.push(context, MaterialPageRoute(builder: (builder) => NotesScreen()));
+                      });
                 },
               ),
             ),

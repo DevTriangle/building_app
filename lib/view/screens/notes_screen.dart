@@ -1,6 +1,7 @@
 import 'package:building_app/model/note.dart';
-import 'package:building_app/view/widgets/note_card.dart';
 import 'package:flutter/material.dart';
+
+import '../widgets/app_card.dart';
 
 class NotesScreen extends StatefulWidget {
   const NotesScreen({super.key});
