@@ -10,6 +10,12 @@ class HomeViewModel extends ChangeNotifier {
     Building("label", "https://cud.news/wp-content/uploads/2022/04/cud_news-panel.jpg", 3, 42, 939393),
     Building("label", "https://cud.news/wp-content/uploads/2022/04/cud_news-panel.jpg", 3, 42, 939393),
     Building("label", "https://cud.news/wp-content/uploads/2022/04/cud_news-panel.jpg", 3, 42, 939393),
+    Building("label", "https://cud.news/wp-content/uploads/2022/04/cud_news-panel.jpg", 3, 42, 939393),
+    Building("label", "https://cud.news/wp-content/uploads/2022/04/cud_news-panel.jpg", 3, 42, 939393),
+    Building("label", "https://cud.news/wp-content/uploads/2022/04/cud_news-panel.jpg", 3, 42, 939393),
+    Building("label", "https://cud.news/wp-content/uploads/2022/04/cud_news-panel.jpg", 3, 42, 939393),
+    Building("label", "https://cud.news/wp-content/uploads/2022/04/cud_news-panel.jpg", 3, 42, 939393),
+    Building("label", "https://cud.news/wp-content/uploads/2022/04/cud_news-panel.jpg", 3, 42, 939393),
   ];
 
   final List<AppMaterial> materials = [

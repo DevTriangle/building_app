@@ -32,8 +32,8 @@ class BuilderGroupListScreenState extends State<BuilderGroupListScreen> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Padding(
-                padding: const EdgeInsets.only(left: 16.0),
+              const Padding(
+                padding: EdgeInsets.only(left: 16.0),
                 child: Text(
                   "Список строителей",
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
