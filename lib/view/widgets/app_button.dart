@@ -12,7 +12,6 @@ class BuildingsButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       elevation: 0,
-      color: Color(0xFFE4C1C1),
       margin: EdgeInsets.zero,
       shape: AppShapes.roundedRectangleShape,
       clipBehavior: Clip.antiAlias,

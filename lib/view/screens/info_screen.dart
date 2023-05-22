@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 class InfoScreen extends StatefulWidget {
   const InfoScreen({super.key});
@@ -50,7 +51,11 @@ class InfoScreenState extends State<InfoScreen> {
                   ],
                 ),
                 const SizedBox(height: 24),
-                //TODO LOGO
+                SvgPicture.asset(
+                  "assets/images/logo.svg",
+                  height: 70,
+                ),
+                SizedBox(height: 5),
                 const Text(
                   "Объекты недвижимости",
                   style: TextStyle(
