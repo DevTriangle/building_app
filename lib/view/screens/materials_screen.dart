@@ -1,3 +1,4 @@
+import 'package:building_app/view/screens/notes_screen.dart';
 import 'package:building_app/view/widgets/app_card.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -51,7 +52,11 @@ class MaterialsScreenState extends State<MaterialsScreen> {
                   itemBuilder: (b, index) {
                     return Column(
                       children: [
-                        MaterialCard(material: viewModel.materials[index], onTap: () {}),
+                        MaterialCard(
+                            material: viewModel.materials[index],
+                            onTap: () {
+                              Navigator.push(context, MaterialPageRoute(builder: (builder) => NotesScreen()));
+                            }),
                         SizedBox(height: 8),
                       ],
                     );

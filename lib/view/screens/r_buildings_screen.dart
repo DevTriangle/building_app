@@ -3,6 +3,8 @@ import 'package:building_app/viewmodel/home_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'notes_screen.dart';
+
 class RBuildingsScreen extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => RBuildingsScreenState();
@@ -52,7 +54,9 @@ class RBuildingsScreenState extends State<RBuildingsScreen> {
                       children: [
                         BuildingCard(
                           building: viewModel.buildings[index],
-                          onTap: () {},
+                          onTap: () {
+                            Navigator.push(context, MaterialPageRoute(builder: (builder) => NotesScreen()));
+                          },
                         ),
                         SizedBox(height: 8),
                       ],
