@@ -28,7 +28,7 @@ class AppTextField extends StatefulWidget {
       required this.onChanged,
       this.inputType = TextInputType.text,
       this.obscureText = false,
-      this.margin = const EdgeInsets.symmetric(horizontal: 16.0, vertical: 3),
+      this.margin = EdgeInsets.zero,
       this.icon,
       this.onIconPressed,
       this.errorText,

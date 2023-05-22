@@ -21,52 +21,56 @@ class NotesScreenState extends State<NotesScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            showModalBottomSheet(
-                context: context,
-                builder: (builder) {
-                  return ManageNoteBottomSheet();
-                });
-          },
-          child: Icon(Icons.add_rounded),
-        ),
-        appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(50),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              IconButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                icon: const Icon(Icons.arrow_back_ios_new_rounded),
-              ),
-              const Padding(
-                padding: EdgeInsets.only(left: 16, right: 16),
-                child: Text(
-                  "Заметки",
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
-                ),
-              )
-            ],
+    return Padding(
+      padding: MediaQuery.of(context).viewInsets,
+      child: SafeArea(
+        child: Scaffold(
+          floatingActionButton: FloatingActionButton(
+            onPressed: () {
+              showModalBottomSheet(
+                  context: context,
+                  useSafeArea: true,
+                  builder: (builder) {
+                    return ManageNoteBottomSheet();
+                  });
+            },
+            child: Icon(Icons.add_rounded),
           ),
-        ),
-        body: notes.isNotEmpty
-            ? ListView.builder(
-                itemCount: notes.length,
-                itemBuilder: (itemBuilder, index) {
-                  return NoteCard(note: notes[index], onTap: () {});
-                },
-              )
-            : const Center(
-                child: Text(
-                  "Заметок нет.",
-                  style: TextStyle(fontSize: 18),
+          appBar: PreferredSize(
+            preferredSize: const Size.fromHeight(50),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                IconButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  icon: const Icon(Icons.arrow_back_ios_new_rounded),
                 ),
-              ),
+                const Padding(
+                  padding: EdgeInsets.only(left: 16, right: 16),
+                  child: Text(
+                    "Заметки",
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+                  ),
+                )
+              ],
+            ),
+          ),
+          body: notes.isNotEmpty
+              ? ListView.builder(
+                  itemCount: notes.length,
+                  itemBuilder: (itemBuilder, index) {
+                    return NoteCard(note: notes[index], onTap: () {});
+                  },
+                )
+              : const Center(
+                  child: Text(
+                    "Заметок нет.",
+                    style: TextStyle(fontSize: 18),
+                  ),
+                ),
+        ),
       ),
     );
   }
