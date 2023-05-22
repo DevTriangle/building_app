@@ -183,7 +183,7 @@ class BuilderGroupCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               const Icon(
-                Icons.group_outlined,
+                Icons.group_rounded,
                 size: 48,
               ),
               Expanded(
