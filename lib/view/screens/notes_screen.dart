@@ -20,6 +20,14 @@ class NotesScreenState extends State<NotesScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            showModalBottomSheet(context: context, builder: (builder) {
+              return ManageNoteBottomSheet();
+            })
+          },
+          child: Icon(Icons.add_rounded),
+        ),
         appBar: PreferredSize(
           preferredSize: const Size.fromHeight(50),
           child: Row(
