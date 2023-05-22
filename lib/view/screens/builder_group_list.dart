@@ -123,14 +123,20 @@ class BuilderGroupListScreenState extends State<BuilderGroupListScreen> {
                   } else {
                     return Expanded(
                       child: Center(
-                        child: Text("Бригады отсутствуют!"),
+                        child: Text(
+                          "Заметок нет.",
+                          style: TextStyle(fontSize: 18),
+                        ),
                       ),
                     );
                   }
                 } else {
                   return Expanded(
                     child: Center(
-                      child: Text("Бригады отсутствуют!"),
+                      child: Text(
+                        "Заметок нет.",
+                        style: TextStyle(fontSize: 18),
+                      ),
                     ),
                   );
                 }

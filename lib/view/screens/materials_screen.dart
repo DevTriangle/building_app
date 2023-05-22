@@ -119,14 +119,20 @@ class MaterialsScreenState extends State<MaterialsScreen> {
                   } else {
                     return Expanded(
                       child: Center(
-                        child: Text("Материалы отсутствуют!"),
+                        child: Text(
+                          "Заметок нет.",
+                          style: TextStyle(fontSize: 18),
+                        ),
                       ),
                     );
                   }
                 } else {
                   return Expanded(
                     child: Center(
-                      child: Text("Материалы отсутствуют!"),
+                      child: Text(
+                        "Заметок нет.",
+                        style: TextStyle(fontSize: 18),
+                      ),
                     ),
                   );
                 }
