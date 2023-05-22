@@ -1,3 +1,4 @@
+import 'package:building_app/view/screens/r_buildings_screen.dart';
 import 'package:building_app/view/widgets/app_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -45,7 +46,9 @@ class BuildingsScreenState extends State<BuildingsScreen> {
             BuildingsButton(
               icon: Icons.holiday_village_rounded,
               label: "Готовые постройки",
-              onTap: () {},
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (b) => RBuildingsScreen()));
+              },
             ),
             SizedBox(height: 16),
             BuildingsButton(
