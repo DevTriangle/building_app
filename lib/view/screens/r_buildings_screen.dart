@@ -43,31 +43,23 @@ class RBuildingsScreenState extends State<RBuildingsScreen> {
             ],
           ),
         ),
-        body: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            children: [
-              Expanded(
-                child: ListView.builder(
-                  physics: const BouncingScrollPhysics(),
-                  itemCount: viewModel.buildings.length,
-                  itemBuilder: (b, index) {
-                    return Column(
-                      children: [
-                        BuildingCard(
-                          building: viewModel.buildings[index],
-                          onTap: () {
-                            Navigator.push(context, MaterialPageRoute(builder: (builder) => NotesScreen()));
-                          },
-                        ),
-                        const SizedBox(height: 8),
-                      ],
-                    );
-                  },
-                ),
+        body: Column(
+          children: [
+            Expanded(
+              child: ListView.builder(
+                physics: const BouncingScrollPhysics(),
+                itemCount: viewModel.buildings.length,
+                itemBuilder: (b, index) {
+                  return BuildingCard(
+                    building: viewModel.buildings[index],
+                    onTap: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (builder) => NotesScreen()));
+                    },
+                  );
+                },
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

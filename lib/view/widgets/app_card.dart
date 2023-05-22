@@ -16,7 +16,7 @@ class BuildingCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      margin: EdgeInsets.zero,
+      margin: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       elevation: 0,
       clipBehavior: Clip.antiAlias,
       shape: AppShapes.roundedRectangleShape,
@@ -40,7 +40,7 @@ class BuildingCard extends StatelessWidget {
                   Text(
                     building.label,
                     style: const TextStyle(
-                      fontSize: 16,
+                      fontSize: 17,
                       fontWeight: FontWeight.w500,
                     ),
                   ),
@@ -72,7 +72,7 @@ class MaterialCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      margin: EdgeInsets.zero,
+      margin: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       elevation: 0,
       clipBehavior: Clip.antiAlias,
       shape: AppShapes.roundedRectangleShape,
@@ -88,7 +88,7 @@ class MaterialCard extends StatelessWidget {
                 child: Text(
                   material.name,
                   style: const TextStyle(
-                    fontSize: 18,
+                    fontSize: 17,
                     fontWeight: FontWeight.w500,
                   ),
                 ),
@@ -134,7 +134,7 @@ class NoteCard extends StatelessWidget {
                 children: [
                   Text(
                     note.title,
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+                    style: TextStyle(fontSize: 17, fontWeight: FontWeight.w500),
                     softWrap: true,
                   ),
                   SizedBox(
@@ -144,7 +144,7 @@ class NoteCard extends StatelessWidget {
                     width: MediaQuery.of(context).size.width - 64,
                     child: Text(
                       note.text.length <= 200 ? note.text : "${note.text.substring(0, 200)}...",
-                      style: TextStyle(fontSize: 16),
+                      style: TextStyle(fontSize: 14),
                       softWrap: true,
                     ),
                   ),
@@ -182,6 +182,10 @@ class BuilderGroupCard extends StatelessWidget {
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
+              Icon(
+                Icons.group_outlined,
+                size: 48,
+              ),
               Expanded(
                 child: Column(
                   children: [
