@@ -8,4 +8,6 @@
         android:height="100dp"
         android:gravity="center"
         android:drawable="@drawable/splash_logo" />
+
+    <item android:drawable="@drawable/splash_brand" android:top="200dp" android:gravity="center"/>
 </layer-list>
