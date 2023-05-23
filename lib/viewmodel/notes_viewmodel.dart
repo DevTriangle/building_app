@@ -1,12 +1,8 @@
 import 'dart:convert';
 
-import 'package:building_app/model/building.dart';
-import 'package:building_app/model/material.dart';
 import 'package:building_app/model/note.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-import '../model/builder_group.dart';
 
 class NotesViewModel extends ChangeNotifier {
   final List<Note> notes = [];

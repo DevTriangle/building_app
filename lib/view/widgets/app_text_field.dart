@@ -80,9 +80,10 @@ class _AppTextFieldState extends State<AppTextField> {
                 fillColor: Theme.of(context).cardColor,
                 labelStyle: TextStyle(color: Theme.of(context).hintColor, fontWeight: FontWeight.w400, fontSize: 16.0),
                 enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Theme.of(context).cardColor, width: 1.5), borderRadius: AppShapes.borderRadius),
-                errorBorder: OutlineInputBorder(borderSide: BorderSide(color: Theme.of(context).errorColor, width: 1.5), borderRadius: AppShapes.borderRadius),
+                errorBorder:
+                    OutlineInputBorder(borderSide: BorderSide(color: Theme.of(context).colorScheme.error, width: 1.5), borderRadius: AppShapes.borderRadius),
                 errorText: widget.errorText,
-                errorStyle: TextStyle(color: Theme.of(context).errorColor, height: 0.5),
+                errorStyle: TextStyle(color: Theme.of(context).colorScheme.error, height: 0.5),
                 border: OutlineInputBorder(borderSide: BorderSide(color: Theme.of(context).primaryColor, width: 1.5), borderRadius: AppShapes.borderRadius),
                 contentPadding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
                 labelText: widget.hint,

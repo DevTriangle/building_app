@@ -1,4 +1,3 @@
-import 'package:building_app/view/screens/notes_screen.dart';
 import 'package:building_app/view/widgets/app_card.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -75,7 +74,7 @@ class MaterialsScreenState extends State<MaterialsScreen> {
               future: viewModel.loadMaterials(),
               builder: (context, snapshot) {
                 if (snapshot.data != null) {
-                  if (snapshot.data!.length > 0) {
+                  if (snapshot.data!.isNotEmpty) {
                     return Expanded(
                       child: ListView.builder(
                         physics: const BouncingScrollPhysics(),
@@ -117,7 +116,7 @@ class MaterialsScreenState extends State<MaterialsScreen> {
                       ),
                     );
                   } else {
-                    return Expanded(
+                    return const Expanded(
                       child: Center(
                         child: Text(
                           "Материалы отсутствуют!",
@@ -127,7 +126,7 @@ class MaterialsScreenState extends State<MaterialsScreen> {
                     );
                   }
                 } else {
-                  return Expanded(
+                  return const Expanded(
                     child: Center(
                       child: Text(
                         "Материалы отсутствуют.",

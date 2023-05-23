@@ -85,8 +85,8 @@ class ManageNoteBottomSheetState extends State<ManageNoteBottomSheet> {
   String _title = "";
   String _text = "";
 
-  TextEditingController _titleController = TextEditingController();
-  TextEditingController _textController = TextEditingController();
+  final TextEditingController _titleController = TextEditingController();
+  final TextEditingController _textController = TextEditingController();
 
   @override
   void initState() {
@@ -155,7 +155,7 @@ class ManageNoteBottomSheetState extends State<ManageNoteBottomSheet> {
                           ),
                         ),
                       )
-                    : SizedBox(),
+                    : const SizedBox(),
                 TextButton(
                   onPressed: () {
                     widget.onSave(
@@ -302,10 +302,10 @@ class ManageBuildingBottomSheetState extends State<ManageBuildingBottomSheet> {
                     onPressed: () {
                       widget.onDeletePressed!();
                     },
-                    child: Text("Удалить"),
-                    style: ButtonStyle(foregroundColor: MaterialStateProperty.all(Theme.of(context).errorColor)),
+                    style: ButtonStyle(foregroundColor: MaterialStateProperty.all(Theme.of(context).colorScheme.error)),
+                    child: const Text("Удалить"),
                   )
-                : SizedBox(),
+                : const SizedBox(),
             TextButton(
               onPressed: () {
                 widget.onSavePressed(
@@ -318,7 +318,7 @@ class ManageBuildingBottomSheetState extends State<ManageBuildingBottomSheet> {
                   ),
                 );
               },
-              child: Text("Сохранить"),
+              child: const Text("Сохранить"),
             )
           ],
         ),
@@ -382,15 +382,15 @@ class ManageMaterialBottomSheetState extends State<ManageMaterialBottomSheet> {
                     onPressed: () {
                       widget.onDeletePressed!();
                     },
-                    child: Text("Удалить"),
-                    style: ButtonStyle(foregroundColor: MaterialStateProperty.all(Theme.of(context).errorColor)),
+                    style: ButtonStyle(foregroundColor: MaterialStateProperty.all(Theme.of(context).colorScheme.error)),
+                    child: const Text("Удалить"),
                   )
-                : SizedBox(),
+                : const SizedBox(),
             TextButton(
               onPressed: () {
                 widget.onSavePressed(AppMaterial(Random().nextInt(9999999), _name.text));
               },
-              child: Text("Сохранить"),
+              child: const Text("Сохранить"),
             )
           ],
         ),
@@ -471,15 +471,15 @@ class ManageBuildersBottomSheetState extends State<ManageBuildersBottomSheet> {
                     onPressed: () {
                       widget.onDeletePressed!();
                     },
-                    child: Text("Удалить"),
-                    style: ButtonStyle(foregroundColor: MaterialStateProperty.all(Theme.of(context).errorColor)),
+                    style: ButtonStyle(foregroundColor: MaterialStateProperty.all(Theme.of(context).colorScheme.error)),
+                    child: const Text("Удалить"),
                   )
-                : SizedBox(),
+                : const SizedBox(),
             TextButton(
               onPressed: () {
                 widget.onSavePressed(BuilderGroup(_name.text, int.parse(_count.text)));
               },
-              child: Text("Сохранить"),
+              child: const Text("Сохранить"),
             )
           ],
         ),

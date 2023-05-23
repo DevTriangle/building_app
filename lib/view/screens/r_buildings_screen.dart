@@ -1,11 +1,8 @@
-import 'package:building_app/view/colors.dart';
 import 'package:building_app/view/widgets/app_bottom_sheet.dart';
 import 'package:building_app/view/widgets/app_card.dart';
 import 'package:building_app/viewmodel/home_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
-import 'notes_screen.dart';
 
 class RBuildingsScreen extends StatefulWidget {
   const RBuildingsScreen({super.key});
@@ -76,7 +73,7 @@ class RBuildingsScreenState extends State<RBuildingsScreen> {
                 future: viewModel.loadBuildings(),
                 builder: (context, snapshot) {
                   if (snapshot.data != null) {
-                    if (snapshot.data!.length > 0) {
+                    if (snapshot.data!.isNotEmpty) {
                       return Expanded(
                         child: ListView.builder(
                           physics: const BouncingScrollPhysics(),
@@ -118,7 +115,7 @@ class RBuildingsScreenState extends State<RBuildingsScreen> {
                         ),
                       );
                     } else {
-                      return Expanded(
+                      return const Expanded(
                         child: Center(
                           child: Text(
                             "Готовые постройки отсутствуют!",
@@ -128,7 +125,7 @@ class RBuildingsScreenState extends State<RBuildingsScreen> {
                       );
                     }
                   } else {
-                    return SizedBox();
+                    return const SizedBox();
                   }
                 }),
           ],

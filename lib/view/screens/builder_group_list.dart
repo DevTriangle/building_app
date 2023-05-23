@@ -79,7 +79,7 @@ class BuilderGroupListScreenState extends State<BuilderGroupListScreen> {
               future: viewModel.loadBuilders(),
               builder: (context, snapshot) {
                 if (snapshot.data != null) {
-                  if (snapshot.data!.length > 0) {
+                  if (snapshot.data!.isNotEmpty) {
                     return Expanded(
                       child: ListView.builder(
                         physics: const BouncingScrollPhysics(),
@@ -121,7 +121,7 @@ class BuilderGroupListScreenState extends State<BuilderGroupListScreen> {
                       ),
                     );
                   } else {
-                    return Expanded(
+                    return const Expanded(
                       child: Center(
                         child: Text(
                           "Бригады отсутствуют!",
@@ -131,7 +131,7 @@ class BuilderGroupListScreenState extends State<BuilderGroupListScreen> {
                     );
                   }
                 } else {
-                  return Expanded(
+                  return const Expanded(
                     child: Center(
                       child: Text(
                         "Бригады отсутствуют!",

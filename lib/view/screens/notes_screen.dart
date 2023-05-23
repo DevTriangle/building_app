@@ -1,4 +1,3 @@
-import 'package:building_app/model/note.dart';
 import 'package:building_app/viewmodel/notes_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -49,7 +48,7 @@ class NotesScreenState extends State<NotesScreen> {
               },
             );
           },
-          child: Icon(Icons.add_rounded),
+          child: const Icon(Icons.add_rounded),
         ),
         appBar: PreferredSize(
           preferredSize: const Size.fromHeight(50),
