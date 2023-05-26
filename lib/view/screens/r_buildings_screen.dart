@@ -81,6 +81,11 @@ class RBuildingsScreenState extends State<RBuildingsScreen> {
                           itemBuilder: (b, index) {
                             return BuildingCard(
                               building: viewModel.buildings[index],
+                              onSave: () {
+                                viewModel.buildings[index].isFavorite = !viewModel.buildings[index].isFavorite;
+                                viewModel.saveBuilders();
+                                setState(() {});
+                              },
                               onTap: () {
                                 showModalBottomSheet(
                                   isScrollControlled: true,

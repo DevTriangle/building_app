@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:building_app/model/builder_group.dart';
 import 'package:building_app/view/shapes.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -9,9 +11,10 @@ import '../../model/note.dart';
 
 class BuildingCard extends StatelessWidget {
   final Building building;
+  final Function() onSave;
   final Function() onTap;
 
-  const BuildingCard({super.key, required this.building, required this.onTap});
+  const BuildingCard({super.key, required this.building, required this.onTap, required this.onSave});
 
   @override
   Widget build(BuildContext context) {
@@ -25,8 +28,8 @@ class BuildingCard extends StatelessWidget {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Ink.image(
-              image: CachedNetworkImageProvider(building.image),
+            Image.file(
+              File(building.image),
               width: MediaQuery.of(context).size.width * 0.5 - 32,
               height: 100,
               fit: BoxFit.cover,
@@ -55,7 +58,19 @@ class BuildingCard extends StatelessWidget {
                   ),
                 ],
               ),
-            )
+            ),
+            IconButton(
+              onPressed: onSave,
+              icon: building.isFavorite
+                  ? const Icon(
+                      Icons.bookmark_rounded,
+                      size: 30,
+                    )
+                  : const Icon(
+                      Icons.bookmark_outline_rounded,
+                      size: 30,
+                    ),
+            ),
           ],
         ),
       ),
@@ -105,7 +120,7 @@ class MaterialCard extends StatelessWidget {
                         Icons.bookmark_outline_rounded,
                         size: 30,
                       ),
-              )
+              ),
             ],
           ),
         ),
@@ -169,12 +184,15 @@ class NoteCard extends StatelessWidget {
 
 class BuilderGroupCard extends StatelessWidget {
   final BuilderGroup builderGroup;
+  final Function() onSave;
+
   final Function() onTap;
 
   const BuilderGroupCard({
     super.key,
     required this.builderGroup,
     required this.onTap,
+    required this.onSave,
   });
 
   @override
@@ -211,7 +229,19 @@ class BuilderGroupCard extends StatelessWidget {
                     ),
                   ],
                 ),
-              )
+              ),
+              IconButton(
+                onPressed: onSave,
+                icon: builderGroup.isFavorite
+                    ? const Icon(
+                        Icons.bookmark_rounded,
+                        size: 30,
+                      )
+                    : const Icon(
+                        Icons.bookmark_outline_rounded,
+                        size: 30,
+                      ),
+              ),
             ],
           ),
         ),
