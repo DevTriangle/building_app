@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:building_app/model/builder_group.dart';
 import 'package:building_app/view/shapes.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -25,8 +27,8 @@ class BuildingCard extends StatelessWidget {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Ink.image(
-              image: CachedNetworkImageProvider(building.image),
+            Image.file(
+              File(building.image),
               width: MediaQuery.of(context).size.width * 0.5 - 32,
               height: 100,
               fit: BoxFit.cover,
