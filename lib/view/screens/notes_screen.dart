@@ -38,29 +38,29 @@ class NotesScreenState extends State<NotesScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            showModalBottomSheet(
-              context: context,
-              isScrollControlled: true,
-              builder: (builder) {
-                return ManageNoteBottomSheet(
-                  onSave: (note, _) async {
-                    viewModel.notes.add(note);
+        // floatingActionButton: FloatingActionButton(
+        //   onPressed: () {
+        //     showModalBottomSheet(
+        //       context: context,
+        //       isScrollControlled: true,
+        //       builder: (builder) {
+        //         return ManageNoteBottomSheet(
+        //           onSave: (note, _) async {
+        //             viewModel.notes.add(note);
 
-                    await viewModel.saveNotes();
+        //             await viewModel.saveNotes();
 
-                    setState(() {});
+        //             setState(() {});
 
-                    Navigator.pop(context);
-                  },
-                  onRemove: () {},
-                );
-              },
-            );
-          },
-          child: const Icon(Icons.add_rounded),
-        ),
+        //             Navigator.pop(context);
+        //           },
+        //           onRemove: () {},
+        //         );
+        //       },
+        //     );
+        //   },
+        //   child: const Icon(Icons.add_rounded),
+        // ),
         appBar: PreferredSize(
           preferredSize: const Size.fromHeight(50),
           child: Row(
