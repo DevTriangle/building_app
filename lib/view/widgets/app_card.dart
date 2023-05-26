@@ -66,8 +66,9 @@ class BuildingCard extends StatelessWidget {
 class MaterialCard extends StatelessWidget {
   final AppMaterial material;
   final Function() onTap;
+  final Function() onSave;
 
-  const MaterialCard({super.key, required this.material, required this.onTap});
+  const MaterialCard({super.key, required this.material, required this.onTap, required this.onSave});
 
   @override
   Widget build(BuildContext context) {
@@ -84,7 +85,7 @@ class MaterialCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               SizedBox(
-                width: MediaQuery.of(context).size.width - 94,
+                width: MediaQuery.of(context).size.width - 112,
                 child: Text(
                   material.name,
                   style: const TextStyle(
@@ -93,9 +94,17 @@ class MaterialCard extends StatelessWidget {
                   ),
                 ),
               ),
-              const Icon(
-                Icons.bookmark_outline_rounded,
-                size: 30,
+              IconButton(
+                onPressed: onSave,
+                icon: material.isFavorite
+                    ? const Icon(
+                        Icons.bookmark_rounded,
+                        size: 30,
+                      )
+                    : const Icon(
+                        Icons.bookmark_outline_rounded,
+                        size: 30,
+                      ),
               )
             ],
           ),

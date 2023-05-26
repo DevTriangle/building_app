@@ -111,6 +111,11 @@ class MaterialsScreenState extends State<MaterialsScreen> {
                                 },
                               );
                             },
+                            onSave: () {
+                              viewModel.materials[index].isFavorite = !viewModel.materials[index].isFavorite;
+                              viewModel.saveMaterials();
+                              setState(() {});
+                            },
                           );
                         },
                       ),

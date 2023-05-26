@@ -4,8 +4,9 @@ class Building {
   final int roomCount;
   final double square;
   final double price;
+  bool isFavorite;
 
-  Building(this.label, this.image, this.roomCount, this.square, this.price);
+  Building(this.label, this.image, this.roomCount, this.square, this.price, this.isFavorite);
 
   factory Building.fromJson(Map<String, dynamic> json) {
     return Building(
@@ -14,6 +15,7 @@ class Building {
       json["roomCount"],
       json["square"],
       json["price"],
+      json["isFavorite"],
     );
   }
 
@@ -23,5 +25,6 @@ class Building {
         "roomCount": roomCount,
         "square": square,
         "price": price,
+        "isFavorite": isFavorite,
       };
 }
