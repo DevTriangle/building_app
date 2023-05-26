@@ -101,13 +101,17 @@ class MaterialCard extends StatelessWidget {
             children: [
               SizedBox(
                 width: MediaQuery.of(context).size.width - 112,
-                child: Text(
-                  material.name,
-                  style: const TextStyle(
-                    fontSize: 17,
-                    fontWeight: FontWeight.w500,
+                child: RichText(
+                    text: TextSpan(children: [
+                  TextSpan(
+                    text: material.name,
+                    style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w500, color: Colors.black),
                   ),
-                ),
+                  TextSpan(
+                    text: " (${material.price}₽)",
+                    style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w500, color: Colors.grey),
+                  ),
+                ])),
               ),
               IconButton(
                 onPressed: onSave,

@@ -359,6 +359,7 @@ class ManageMaterialBottomSheet extends StatefulWidget {
 
 class ManageMaterialBottomSheetState extends State<ManageMaterialBottomSheet> {
   final _name = TextEditingController();
+  final _price = TextEditingController();
 
   @override
   void initState() {
@@ -366,6 +367,7 @@ class ManageMaterialBottomSheetState extends State<ManageMaterialBottomSheet> {
 
     if (widget.material != null) {
       _name.text = widget.material!.name;
+      _price.text = widget.material!.price;
     }
   }
 
@@ -387,6 +389,20 @@ class ManageMaterialBottomSheetState extends State<ManageMaterialBottomSheet> {
           onChanged: (value) {},
           controller: _name,
         ),
+        Text(
+          "Цена",
+          style: TextStyle(
+            fontSize: 15,
+            color: Theme.of(context).hintColor,
+          ),
+        ),
+        const SizedBox(height: 4),
+        AppTextField(
+          hint: "",
+          onChanged: (value) {},
+          controller: _price,
+          inputType: TextInputType.number,
+        ),
         const SizedBox(height: 8),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -402,7 +418,7 @@ class ManageMaterialBottomSheetState extends State<ManageMaterialBottomSheet> {
                 : const SizedBox(),
             TextButton(
               onPressed: () {
-                widget.onSavePressed(AppMaterial(Random().nextInt(9999999), _name.text, false));
+                widget.onSavePressed(AppMaterial(Random().nextInt(9999999), _name.text, _price.text, false));
               },
               child: const Text("Сохранить"),
             )
