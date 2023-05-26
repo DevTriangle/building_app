@@ -213,7 +213,8 @@ class ManageBuildingBottomSheetState extends State<ManageBuildingBottomSheet> {
 
     if (widget.building != null) {
       _name.text = widget.building!.label;
-      _image.text = widget.building!.image;
+      _image.text = "Изображение";
+      image = widget.building!.image;
       _roomCount.text = widget.building!.roomCount.toString();
       _square.text = widget.building!.square.toString();
       _price.text = widget.building!.price.toString();

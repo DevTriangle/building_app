@@ -31,7 +31,7 @@ class BuildingCard extends StatelessWidget {
             Image.file(
               File(building.image),
               width: MediaQuery.of(context).size.width * 0.5 - 32,
-              height: 100,
+              height: 140,
               fit: BoxFit.cover,
             ),
             const SizedBox(width: 8),
@@ -40,11 +40,15 @@ class BuildingCard extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    building.label,
-                    style: const TextStyle(
-                      fontSize: 17,
-                      fontWeight: FontWeight.w500,
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width - (MediaQuery.of(context).size.width * 0.5 - 32) - 88,
+                    child: Text(
+                      building.label,
+                      style: const TextStyle(
+                        fontSize: 17,
+                        fontWeight: FontWeight.w500,
+                      ),
+                      softWrap: true,
                     ),
                   ),
                   const SizedBox(height: 4),
@@ -54,6 +58,10 @@ class BuildingCard extends StatelessWidget {
                   ),
                   Text(
                     "Площадь: ${building.square} м2",
+                    style: const TextStyle(fontSize: 14),
+                  ),
+                  Text(
+                    "Цена: ${building.price}₽",
                     style: const TextStyle(fontSize: 14),
                   ),
                 ],
@@ -102,16 +110,19 @@ class MaterialCard extends StatelessWidget {
               SizedBox(
                 width: MediaQuery.of(context).size.width - 112,
                 child: RichText(
-                    text: TextSpan(children: [
-                  TextSpan(
-                    text: material.name,
-                    style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w500, color: Colors.black),
+                  text: TextSpan(
+                    children: [
+                      TextSpan(
+                        text: material.name,
+                        style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w500, color: Colors.black),
+                      ),
+                      TextSpan(
+                        text: " (${material.price}₽)",
+                        style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w500, color: Colors.grey),
+                      ),
+                    ],
                   ),
-                  TextSpan(
-                    text: " (${material.price}₽)",
-                    style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w500, color: Colors.grey),
-                  ),
-                ])),
+                ),
               ),
               IconButton(
                 onPressed: onSave,
