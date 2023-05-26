@@ -2,6 +2,7 @@ import 'package:building_app/view/widgets/app_bottom_sheet.dart';
 import 'package:building_app/view/widgets/app_card.dart';
 import 'package:building_app/viewmodel/home_viewmodel.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 
 class RBuildingsScreen extends StatefulWidget {
@@ -14,11 +15,24 @@ class RBuildingsScreen extends StatefulWidget {
 class RBuildingsScreenState extends State<RBuildingsScreen> {
   late HomeViewModel viewModel;
 
+  final ImagePicker imagePicker = ImagePicker();
+  String image = "";
+
   @override
   void initState() {
     super.initState();
 
     viewModel = Provider.of<HomeViewModel>(context, listen: false);
+  }
+
+  void _selectImage() async {
+    final XFile? selectedImage = await imagePicker.pickImage(source: ImageSource.gallery);
+
+    if (selectedImage != null) {
+      image = selectedImage.path;
+    }
+
+    setState(() {});
   }
 
   @override
