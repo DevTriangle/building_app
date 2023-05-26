@@ -87,6 +87,11 @@ class BuilderGroupListScreenState extends State<BuilderGroupListScreen> {
                         itemBuilder: (b, index) {
                           return BuilderGroupCard(
                             builderGroup: viewModel.builderGroups[index],
+                            onSave: () {
+                              viewModel.builderGroups[index].isFavorite = !viewModel.builderGroups[index].isFavorite;
+                              viewModel.saveBuilders();
+                              setState(() {});
+                            },
                             onTap: () {
                               showModalBottomSheet(
                                 isScrollControlled: true,
