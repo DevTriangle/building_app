@@ -309,13 +309,7 @@ class ManageBuildingBottomSheetState extends State<ManageBuildingBottomSheet> {
             TextButton(
               onPressed: () {
                 widget.onSavePressed(
-                  Building(
-                    _name.text,
-                    _image.text,
-                    int.parse(_roomCount.text),
-                    double.parse(_square.text),
-                    double.parse(_price.text),
-                  ),
+                  Building(_name.text, _image.text, int.parse(_roomCount.text), double.parse(_square.text), double.parse(_price.text), false),
                 );
               },
               child: const Text("Сохранить"),
@@ -388,7 +382,7 @@ class ManageMaterialBottomSheetState extends State<ManageMaterialBottomSheet> {
                 : const SizedBox(),
             TextButton(
               onPressed: () {
-                widget.onSavePressed(AppMaterial(Random().nextInt(9999999), _name.text));
+                widget.onSavePressed(AppMaterial(Random().nextInt(9999999), _name.text, false));
               },
               child: const Text("Сохранить"),
             )
@@ -477,7 +471,7 @@ class ManageBuildersBottomSheetState extends State<ManageBuildersBottomSheet> {
                 : const SizedBox(),
             TextButton(
               onPressed: () {
-                widget.onSavePressed(BuilderGroup(_name.text, int.parse(_count.text)));
+                widget.onSavePressed(BuilderGroup(_name.text, int.parse(_count.text), false));
               },
               child: const Text("Сохранить"),
             )
