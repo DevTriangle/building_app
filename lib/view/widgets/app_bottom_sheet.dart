@@ -5,6 +5,7 @@ import 'package:building_app/model/material.dart';
 import 'package:building_app/model/note.dart';
 import 'package:building_app/view/widgets/app_text_field.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 import '../../model/building.dart';
 import '../shapes.dart';
@@ -203,6 +204,9 @@ class ManageBuildingBottomSheetState extends State<ManageBuildingBottomSheet> {
   final _square = TextEditingController();
   final _price = TextEditingController();
 
+  final ImagePicker imagePicker = ImagePicker();
+  String image = "";
+
   @override
   void initState() {
     super.initState();
@@ -214,6 +218,17 @@ class ManageBuildingBottomSheetState extends State<ManageBuildingBottomSheet> {
       _square.text = widget.building!.square.toString();
       _price.text = widget.building!.price.toString();
     }
+  }
+
+  void _selectImage() async {
+    final XFile? selectedImage = await imagePicker.pickImage(source: ImageSource.gallery);
+
+    if (selectedImage != null) {
+      image = selectedImage.path;
+      _image.text = selectedImage.name;
+    }
+
+    setState(() {});
   }
 
   @override
@@ -236,7 +251,7 @@ class ManageBuildingBottomSheetState extends State<ManageBuildingBottomSheet> {
         ),
         const SizedBox(height: 8),
         Text(
-          "Изображение (url)",
+          "Изображение",
           style: TextStyle(
             fontSize: 15,
             color: Theme.of(context).hintColor,
@@ -247,6 +262,11 @@ class ManageBuildingBottomSheetState extends State<ManageBuildingBottomSheet> {
           hint: "",
           onChanged: (value) {},
           controller: _image,
+          readOnly: true,
+          icon: Icons.image_rounded,
+          onTap: () {
+            _selectImage();
+          },
         ),
         const SizedBox(height: 8),
         Text(
@@ -309,7 +329,7 @@ class ManageBuildingBottomSheetState extends State<ManageBuildingBottomSheet> {
             TextButton(
               onPressed: () {
                 widget.onSavePressed(
-                  Building(_name.text, _image.text, int.parse(_roomCount.text), double.parse(_square.text), double.parse(_price.text), false),
+                  Building(_name.text, image, int.parse(_roomCount.text), double.parse(_square.text), double.parse(_price.text), false),
                 );
               },
               child: const Text("Сохранить"),

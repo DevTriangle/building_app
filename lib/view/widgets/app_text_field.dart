@@ -21,6 +21,7 @@ class AppTextField extends StatefulWidget {
   final TextEditingController? controller;
   final List<TextInputFormatter>? inputFormatter;
   final TextCapitalization textCapitalization;
+  final Function()? onTap;
 
   const AppTextField(
       {super.key,
@@ -40,7 +41,8 @@ class AppTextField extends StatefulWidget {
       this.readOnly = false,
       this.controller,
       this.inputFormatter,
-      this.textCapitalization = TextCapitalization.sentences});
+      this.textCapitalization = TextCapitalization.sentences,
+      this.onTap});
 
   @override
   State<StatefulWidget> createState() => _AppTextFieldState();
@@ -57,6 +59,7 @@ class _AppTextFieldState extends State<AppTextField> {
             margin: widget.margin,
             child: TextFormField(
               key: _formKey,
+              onTap: widget.onTap,
               textCapitalization: widget.textCapitalization,
               controller: widget.controller,
               inputFormatters: widget.inputFormatter,

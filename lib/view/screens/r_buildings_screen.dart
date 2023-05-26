@@ -15,24 +15,11 @@ class RBuildingsScreen extends StatefulWidget {
 class RBuildingsScreenState extends State<RBuildingsScreen> {
   late HomeViewModel viewModel;
 
-  final ImagePicker imagePicker = ImagePicker();
-  String image = "";
-
   @override
   void initState() {
     super.initState();
 
     viewModel = Provider.of<HomeViewModel>(context, listen: false);
-  }
-
-  void _selectImage() async {
-    final XFile? selectedImage = await imagePicker.pickImage(source: ImageSource.gallery);
-
-    if (selectedImage != null) {
-      image = selectedImage.path;
-    }
-
-    setState(() {});
   }
 
   @override
