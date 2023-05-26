@@ -87,156 +87,167 @@ class NotesScreenState extends State<NotesScreen> {
           future: loadData(),
           builder: (fContext, snapshot) {
             if (snapshot.hasData) {
-              return SingleChildScrollView(
-                child: Column(
-                  children: [
-                    ListView.builder(
-                      itemCount: homeViewModel.buildings.length,
-                      shrinkWrap: true,
-                      physics: NeverScrollableScrollPhysics(),
-                      itemBuilder: (itemBuilder, index) {
-                        if (homeViewModel.buildings[index].isFavorite) {
-                          return BuildingCard(
-                            building: homeViewModel.buildings[index],
-                            onSave: () {
-                              homeViewModel.buildings[index].isFavorite = !homeViewModel.buildings[index].isFavorite;
-                              homeViewModel.saveBuilders();
-                              setState(() {});
-                            },
-                            onTap: () {
-                              showModalBottomSheet(
-                                isScrollControlled: true,
-                                shape: const RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.only(
-                                    topLeft: Radius.circular(16),
-                                    topRight: Radius.circular(16),
+              if (homeViewModel.builderGroups.where((element) => element.isFavorite).isNotEmpty ||
+                  homeViewModel.buildings.where((element) => element.isFavorite).isNotEmpty ||
+                  homeViewModel.materials.where((element) => element.isFavorite).isNotEmpty) {
+                return SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      ListView.builder(
+                        itemCount: homeViewModel.buildings.length,
+                        shrinkWrap: true,
+                        physics: NeverScrollableScrollPhysics(),
+                        itemBuilder: (itemBuilder, index) {
+                          if (homeViewModel.buildings[index].isFavorite) {
+                            return BuildingCard(
+                              building: homeViewModel.buildings[index],
+                              onSave: () {
+                                homeViewModel.buildings[index].isFavorite = !homeViewModel.buildings[index].isFavorite;
+                                homeViewModel.saveBuildings();
+                                setState(() {});
+                              },
+                              onTap: () {
+                                showModalBottomSheet(
+                                  isScrollControlled: true,
+                                  shape: const RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.only(
+                                      topLeft: Radius.circular(16),
+                                      topRight: Radius.circular(16),
+                                    ),
                                   ),
-                                ),
-                                context: context,
-                                builder: (b) {
-                                  return ManageBuildingBottomSheet(
-                                    building: homeViewModel.buildings[index],
-                                    onSavePressed: (building) async {
-                                      Navigator.pop(context);
-                                      homeViewModel.buildings[index] = building;
-                                      homeViewModel.saveBuildings();
-                                      setState(() {});
-                                    },
-                                    onDeletePressed: () {
-                                      Navigator.pop(context);
-                                      homeViewModel.buildings.removeAt(index);
-                                      homeViewModel.saveBuildings();
-                                      setState(() {});
-                                    },
-                                  );
-                                },
-                              );
-                            },
-                          );
-                        } else {
-                          return SizedBox();
-                        }
-                      },
-                    ),
-                    ListView.builder(
-                      itemCount: homeViewModel.materials.length,
-                      shrinkWrap: true,
-                      physics: NeverScrollableScrollPhysics(),
-                      itemBuilder: (itemBuilder, index) {
-                        if (homeViewModel.materials[index].isFavorite) {
-                          return MaterialCard(
-                            material: homeViewModel.materials[index],
-                            onTap: () {
-                              showModalBottomSheet(
-                                isScrollControlled: true,
-                                shape: const RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.only(
-                                    topLeft: Radius.circular(16),
-                                    topRight: Radius.circular(16),
+                                  context: context,
+                                  builder: (b) {
+                                    return ManageBuildingBottomSheet(
+                                      building: homeViewModel.buildings[index],
+                                      onSavePressed: (building) async {
+                                        Navigator.pop(context);
+                                        homeViewModel.buildings[index] = building;
+                                        homeViewModel.saveBuildings();
+                                        setState(() {});
+                                      },
+                                      onDeletePressed: () {
+                                        Navigator.pop(context);
+                                        homeViewModel.buildings.removeAt(index);
+                                        homeViewModel.saveBuildings();
+                                        setState(() {});
+                                      },
+                                    );
+                                  },
+                                );
+                              },
+                            );
+                          } else {
+                            return SizedBox();
+                          }
+                        },
+                      ),
+                      ListView.builder(
+                        itemCount: homeViewModel.materials.length,
+                        shrinkWrap: true,
+                        physics: NeverScrollableScrollPhysics(),
+                        itemBuilder: (itemBuilder, index) {
+                          if (homeViewModel.materials[index].isFavorite) {
+                            return MaterialCard(
+                              material: homeViewModel.materials[index],
+                              onTap: () {
+                                showModalBottomSheet(
+                                  isScrollControlled: true,
+                                  shape: const RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.only(
+                                      topLeft: Radius.circular(16),
+                                      topRight: Radius.circular(16),
+                                    ),
                                   ),
-                                ),
-                                context: context,
-                                builder: (b) {
-                                  return ManageMaterialBottomSheet(
-                                    material: homeViewModel.materials[index],
-                                    onSavePressed: (m) {
-                                      Navigator.pop(context);
-                                      homeViewModel.materials[index] = m;
-                                      homeViewModel.saveMaterials();
-                                      setState(() {});
-                                    },
-                                    onDeletePressed: () {
-                                      Navigator.pop(context);
-                                      homeViewModel.materials.removeAt(index);
-                                      homeViewModel.saveMaterials();
-                                      setState(() {});
-                                    },
-                                  );
-                                },
-                              );
-                            },
-                            onSave: () {
-                              homeViewModel.materials[index].isFavorite = !homeViewModel.materials[index].isFavorite;
-                              homeViewModel.saveMaterials();
-                              setState(() {});
-                            },
-                          );
-                        } else {
-                          return SizedBox();
-                        }
-                      },
-                    ),
-                    ListView.builder(
-                      itemCount: homeViewModel.builderGroups.length,
-                      shrinkWrap: true,
-                      physics: NeverScrollableScrollPhysics(),
-                      itemBuilder: (itemBuilder, index) {
-                        if (homeViewModel.builderGroups[index].isFavorite) {
-                          return BuilderGroupCard(
-                            builderGroup: homeViewModel.builderGroups[index],
-                            onSave: () {
-                              homeViewModel.builderGroups[index].isFavorite = !homeViewModel.builderGroups[index].isFavorite;
-                              homeViewModel.saveBuilders();
-                              setState(() {});
-                            },
-                            onTap: () {
-                              showModalBottomSheet(
-                                isScrollControlled: true,
-                                shape: const RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.only(
-                                    topLeft: Radius.circular(16),
-                                    topRight: Radius.circular(16),
+                                  context: context,
+                                  builder: (b) {
+                                    return ManageMaterialBottomSheet(
+                                      material: homeViewModel.materials[index],
+                                      onSavePressed: (m) {
+                                        Navigator.pop(context);
+                                        homeViewModel.materials[index] = m;
+                                        homeViewModel.saveMaterials();
+                                        setState(() {});
+                                      },
+                                      onDeletePressed: () {
+                                        Navigator.pop(context);
+                                        homeViewModel.materials.removeAt(index);
+                                        homeViewModel.saveMaterials();
+                                        setState(() {});
+                                      },
+                                    );
+                                  },
+                                );
+                              },
+                              onSave: () {
+                                homeViewModel.materials[index].isFavorite = !homeViewModel.materials[index].isFavorite;
+                                homeViewModel.saveMaterials();
+                                setState(() {});
+                              },
+                            );
+                          } else {
+                            return SizedBox();
+                          }
+                        },
+                      ),
+                      ListView.builder(
+                        itemCount: homeViewModel.builderGroups.length,
+                        shrinkWrap: true,
+                        physics: NeverScrollableScrollPhysics(),
+                        itemBuilder: (itemBuilder, index) {
+                          if (homeViewModel.builderGroups[index].isFavorite) {
+                            return BuilderGroupCard(
+                              builderGroup: homeViewModel.builderGroups[index],
+                              onSave: () {
+                                homeViewModel.builderGroups[index].isFavorite = !homeViewModel.builderGroups[index].isFavorite;
+                                homeViewModel.saveBuilders();
+                                setState(() {});
+                              },
+                              onTap: () {
+                                showModalBottomSheet(
+                                  isScrollControlled: true,
+                                  shape: const RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.only(
+                                      topLeft: Radius.circular(16),
+                                      topRight: Radius.circular(16),
+                                    ),
                                   ),
-                                ),
-                                context: context,
-                                builder: (b) {
-                                  return ManageBuildersBottomSheet(
-                                    builderGroup: homeViewModel.builderGroups[index],
-                                    onSavePressed: (b) async {
-                                      Navigator.pop(context);
-                                      homeViewModel.builderGroups[index] = b;
-                                      homeViewModel.saveBuilders();
-                                      setState(() {});
-                                    },
-                                    onDeletePressed: () {
-                                      Navigator.pop(context);
-                                      homeViewModel.builderGroups.removeAt(index);
-                                      homeViewModel.saveBuilders();
-                                      setState(() {});
-                                    },
-                                  );
-                                },
-                              );
-                            },
-                          );
-                        } else {
-                          return SizedBox();
-                        }
-                      },
-                    ),
-                  ],
-                ),
-              );
+                                  context: context,
+                                  builder: (b) {
+                                    return ManageBuildersBottomSheet(
+                                      builderGroup: homeViewModel.builderGroups[index],
+                                      onSavePressed: (b) async {
+                                        Navigator.pop(context);
+                                        homeViewModel.builderGroups[index] = b;
+                                        homeViewModel.saveBuilders();
+                                        setState(() {});
+                                      },
+                                      onDeletePressed: () {
+                                        Navigator.pop(context);
+                                        homeViewModel.builderGroups.removeAt(index);
+                                        homeViewModel.saveBuilders();
+                                        setState(() {});
+                                      },
+                                    );
+                                  },
+                                );
+                              },
+                            );
+                          } else {
+                            return SizedBox();
+                          }
+                        },
+                      ),
+                    ],
+                  ),
+                );
+              } else {
+                return const Center(
+                  child: Text(
+                    "Заметки отсутствуют!",
+                    style: TextStyle(fontSize: 18),
+                  ),
+                );
+              }
             } else {
               return const Center(
                 child: Text(

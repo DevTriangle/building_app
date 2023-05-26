@@ -84,7 +84,7 @@ class RBuildingsScreenState extends State<RBuildingsScreen> {
                               building: viewModel.buildings[index],
                               onSave: () {
                                 viewModel.buildings[index].isFavorite = !viewModel.buildings[index].isFavorite;
-                                viewModel.saveBuilders();
+                                viewModel.saveBuildings();
                                 setState(() {});
                               },
                               onTap: () {
