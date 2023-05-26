@@ -98,6 +98,11 @@ class NotesScreenState extends State<NotesScreen> {
                         if (homeViewModel.buildings[index].isFavorite) {
                           return BuildingCard(
                             building: homeViewModel.buildings[index],
+                            onSave: () {
+                              homeViewModel.buildings[index].isFavorite = !homeViewModel.buildings[index].isFavorite;
+                              homeViewModel.saveBuilders();
+                              setState(() {});
+                            },
                             onTap: () {
                               showModalBottomSheet(
                                 isScrollControlled: true,
@@ -189,6 +194,11 @@ class NotesScreenState extends State<NotesScreen> {
                         if (homeViewModel.builderGroups[index].isFavorite) {
                           return BuilderGroupCard(
                             builderGroup: homeViewModel.builderGroups[index],
+                            onSave: () {
+                              homeViewModel.builderGroups[index].isFavorite = !homeViewModel.builderGroups[index].isFavorite;
+                              homeViewModel.saveBuilders();
+                              setState(() {});
+                            },
                             onTap: () {
                               showModalBottomSheet(
                                 isScrollControlled: true,
