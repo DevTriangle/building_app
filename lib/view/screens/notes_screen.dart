@@ -87,86 +87,145 @@ class NotesScreenState extends State<NotesScreen> {
           future: loadData(),
           builder: (fContext, snapshot) {
             if (snapshot.hasData) {
-              return ListView.builder(
-                itemCount: homeViewModel.materials.length,
-                itemBuilder: (itemBuilder, index) {
-                  return MaterialCard(
-                    material: homeViewModel.materials[index],
-                    onTap: () {
-                      showModalBottomSheet(
-                        isScrollControlled: true,
-                        shape: const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(16),
-                            topRight: Radius.circular(16),
-                          ),
-                        ),
-                        context: context,
-                        builder: (b) {
-                          return ManageMaterialBottomSheet(
-                            material: homeViewModel.materials[index],
-                            onSavePressed: (m) {
-                              Navigator.pop(context);
-                              homeViewModel.materials[index] = m;
-                              homeViewModel.saveMaterials();
-                              setState(() {});
+              return SingleChildScrollView(
+                child: Column(
+                  children: [
+                    ListView.builder(
+                      itemCount: homeViewModel.buildings.length,
+                      shrinkWrap: true,
+                      physics: NeverScrollableScrollPhysics(),
+                      itemBuilder: (itemBuilder, index) {
+                        if (homeViewModel.buildings[index].isFavorite) {
+                          return BuildingCard(
+                            building: homeViewModel.buildings[index],
+                            onTap: () {
+                              showModalBottomSheet(
+                                isScrollControlled: true,
+                                shape: const RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(16),
+                                    topRight: Radius.circular(16),
+                                  ),
+                                ),
+                                context: context,
+                                builder: (b) {
+                                  return ManageBuildingBottomSheet(
+                                    building: homeViewModel.buildings[index],
+                                    onSavePressed: (building) async {
+                                      Navigator.pop(context);
+                                      homeViewModel.buildings[index] = building;
+                                      homeViewModel.saveBuildings();
+                                      setState(() {});
+                                    },
+                                    onDeletePressed: () {
+                                      Navigator.pop(context);
+                                      homeViewModel.buildings.removeAt(index);
+                                      homeViewModel.saveBuildings();
+                                      setState(() {});
+                                    },
+                                  );
+                                },
+                              );
                             },
-                            onDeletePressed: () {
-                              Navigator.pop(context);
-                              homeViewModel.materials.removeAt(index);
+                          );
+                        } else {
+                          return SizedBox();
+                        }
+                      },
+                    ),
+                    ListView.builder(
+                      itemCount: homeViewModel.materials.length,
+                      shrinkWrap: true,
+                      physics: NeverScrollableScrollPhysics(),
+                      itemBuilder: (itemBuilder, index) {
+                        if (homeViewModel.materials[index].isFavorite) {
+                          return MaterialCard(
+                            material: homeViewModel.materials[index],
+                            onTap: () {
+                              showModalBottomSheet(
+                                isScrollControlled: true,
+                                shape: const RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(16),
+                                    topRight: Radius.circular(16),
+                                  ),
+                                ),
+                                context: context,
+                                builder: (b) {
+                                  return ManageMaterialBottomSheet(
+                                    material: homeViewModel.materials[index],
+                                    onSavePressed: (m) {
+                                      Navigator.pop(context);
+                                      homeViewModel.materials[index] = m;
+                                      homeViewModel.saveMaterials();
+                                      setState(() {});
+                                    },
+                                    onDeletePressed: () {
+                                      Navigator.pop(context);
+                                      homeViewModel.materials.removeAt(index);
+                                      homeViewModel.saveMaterials();
+                                      setState(() {});
+                                    },
+                                  );
+                                },
+                              );
+                            },
+                            onSave: () {
+                              homeViewModel.materials[index].isFavorite = !homeViewModel.materials[index].isFavorite;
                               homeViewModel.saveMaterials();
                               setState(() {});
                             },
                           );
-                        },
-                      );
-                    },
-                    onSave: () {
-                      homeViewModel.materials[index].isFavorite = !homeViewModel.materials[index].isFavorite;
-                      homeViewModel.saveMaterials();
-                      setState(() {});
-                    },
-                  );
-                  // return NoteCard(
-                  //   note: ,
-                  //   onTap: () {
-                  //     showModalBottomSheet(
-                  //       context: context,
-                  //       isScrollControlled: true,
-                  //       builder: (builder) {
-                  //         return ManageNoteBottomSheet(
-                  //           title: viewModel.notes[index].title,
-                  //           text: viewModel.notes[index].text,
-                  //           isEditing: true,
-                  //           onSave: (note, isEditing) async {
-                  //             if (isEditing) {
-                  //               viewModel.notes.removeAt(index);
-                  //               viewModel.notes.insert(index, note);
-                  //             } else {
-                  //               viewModel.notes.add(note);
-                  //             }
-
-                  //             await viewModel.saveNotes();
-
-                  //             setState(() {});
-
-                  //             Navigator.pop(context);
-                  //           },
-                  //           onRemove: () async {
-                  //             viewModel.notes.removeAt(index);
-
-                  //             await viewModel.saveNotes();
-
-                  //             setState(() {});
-
-                  //             Navigator.pop(context);
-                  //           },
-                  //         );
-                  //       },
-                  //     );
-                  //   },
-                  // );
-                },
+                        } else {
+                          return SizedBox();
+                        }
+                      },
+                    ),
+                    ListView.builder(
+                      itemCount: homeViewModel.builderGroups.length,
+                      shrinkWrap: true,
+                      physics: NeverScrollableScrollPhysics(),
+                      itemBuilder: (itemBuilder, index) {
+                        if (homeViewModel.builderGroups[index].isFavorite) {
+                          return BuilderGroupCard(
+                            builderGroup: homeViewModel.builderGroups[index],
+                            onTap: () {
+                              showModalBottomSheet(
+                                isScrollControlled: true,
+                                shape: const RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(16),
+                                    topRight: Radius.circular(16),
+                                  ),
+                                ),
+                                context: context,
+                                builder: (b) {
+                                  return ManageBuildersBottomSheet(
+                                    builderGroup: homeViewModel.builderGroups[index],
+                                    onSavePressed: (b) async {
+                                      Navigator.pop(context);
+                                      homeViewModel.builderGroups[index] = b;
+                                      homeViewModel.saveBuilders();
+                                      setState(() {});
+                                    },
+                                    onDeletePressed: () {
+                                      Navigator.pop(context);
+                                      homeViewModel.builderGroups.removeAt(index);
+                                      homeViewModel.saveBuilders();
+                                      setState(() {});
+                                    },
+                                  );
+                                },
+                              );
+                            },
+                          );
+                        } else {
+                          return SizedBox();
+                        }
+                      },
+                    ),
+                  ],
+                ),
               );
             } else {
               return const Center(
